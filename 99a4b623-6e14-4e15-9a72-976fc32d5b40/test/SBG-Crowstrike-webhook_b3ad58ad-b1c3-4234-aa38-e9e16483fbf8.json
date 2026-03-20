@@ -642,7 +642,7 @@
       "source_id": "d30c5ba1-562b-4563-bd8d-c9e92c3d65e6",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -889,7 +889,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1774000784,
+  "edited": 1774000852,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
