@@ -402,15 +402,15 @@
           "value_replace": [
             {
               "key": "${target}",
-              "value": "gilc@noshut.pt"
+              "value": "\\\"gilc@noshut.pt\\\""
             },
             {
               "key": "${subject}",
-              "value": "teste"
+              "value": "\\\"teste\\\""
             },
             {
               "key": "${content}",
-              "value": "teste"
+              "value": "\\\"teste\\\""
             }
           ],
           "unique_toggled": false,
