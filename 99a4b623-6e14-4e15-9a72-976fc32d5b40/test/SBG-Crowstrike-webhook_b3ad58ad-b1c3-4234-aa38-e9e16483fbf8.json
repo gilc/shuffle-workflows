@@ -469,6 +469,10 @@
             {
               "key": "${target}",
               "value": ""
+            },
+            {
+              "key": "${content}",
+              "value": "$request_context.raw"
             }
           ],
           "unique_toggled": false,
