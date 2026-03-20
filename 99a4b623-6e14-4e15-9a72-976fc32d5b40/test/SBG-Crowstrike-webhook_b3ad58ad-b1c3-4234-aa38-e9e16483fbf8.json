@@ -322,8 +322,8 @@
       ],
       "execution_variable": {
         "description": "An execution variable",
-        "id": "96d0ce8f-2363-4e25-afc7-af3850ffd18f",
-        "name": "request_context",
+        "id": "1b9117d0-8d41-41a7-b655-6f6168245f3c",
+        "name": "timestamp",
         "value": ""
       },
       "position": {
@@ -940,7 +940,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1774004238,
+  "edited": 1774008980,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
@@ -1010,6 +1010,12 @@
       "description": "An execution variable",
       "id": "96d0ce8f-2363-4e25-afc7-af3850ffd18f",
       "name": "request_context",
+      "value": ""
+    },
+    {
+      "description": "An execution variable",
+      "id": "1b9117d0-8d41-41a7-b655-6f6168245f3c",
+      "name": "timestamp",
       "value": ""
     }
   ],
@@ -1121,17 +1127,27 @@
   "updated_by": "gilc@noshut.pt",
   "validated": false,
   "validation": {
-    "valid": true,
-    "changed_at": 1774004434000,
-    "last_valid": 1774004434000,
+    "valid": false,
+    "changed_at": 1774010191000,
+    "last_valid": 1774007730000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "614866a1-007e-47f8-93b9-d50eba22c558",
+    "execution_id": "a1ef10f1-8504-47cf-8cf7-1031615fd737",
     "node_id": "",
-    "total_problems": 0,
-    "errors": [],
+    "total_problems": 1,
+    "errors": [
+      {
+        "order": 0,
+        "action_id": "53c25c37-44ab-4167-a153-33a2fd140136",
+        "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
+        "app_name": "Shuffle Tools",
+        "error": "Success is false: Check node for more failure details",
+        "type": "configuration",
+        "waiting": false
+      }
+    ],
     "subflow_apps": []
   },
   "parentorg_workflow": "",
