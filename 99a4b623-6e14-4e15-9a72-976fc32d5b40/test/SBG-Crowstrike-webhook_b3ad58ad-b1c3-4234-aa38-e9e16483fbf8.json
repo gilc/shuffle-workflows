@@ -465,6 +465,10 @@
             {
               "key": "${subject}",
               "value": "$request_context.event.description"
+            },
+            {
+              "key": "${target}",
+              "value": ""
             }
           ],
           "unique_toggled": false,
@@ -476,7 +480,7 @@
           "id": "",
           "name": "headers",
           "example": "Content-Type=application/json\nAccept=application/json\r\n",
-          "value": "Content-type=application/jsonContent-Type=application/jsonAccept=application/json",
+          "value": "Content-type=application/json\nAccept=application/json",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -647,7 +651,7 @@
       "source_id": "ed3ff9d2-ae58-4041-9cf7-e37b0857be36",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -883,7 +887,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1773999031,
+  "edited": 1773999124,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
