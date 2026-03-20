@@ -386,7 +386,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\n  \"message\": {\n    \"subject\": \"$request_context.event.description\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"gilc@noshut.pt\"\n        }\n      }\n    ]  \n  }\n}$stringify_raw_json",
+          "value": "{\n  \"message\": {\n    \"subject\": \"$request_context.event.description\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"$stringify_raw_json.escaped_raw\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"gilc@noshut.pt\"\n        }\n      }\n    ]  \n  }\n}$stringify_raw_json$stringify_raw_json",
           "multiline": true,
           "multiselect": false,
           "options": null,
