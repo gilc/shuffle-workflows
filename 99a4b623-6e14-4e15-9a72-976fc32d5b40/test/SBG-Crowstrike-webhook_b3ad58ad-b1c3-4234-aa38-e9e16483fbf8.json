@@ -238,7 +238,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\"message\":\"🚨 Detection received at $request_context.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $request_context\\nDescription: $request_context.event.description\"}",
+          "value": "{\"message\":\"🚨 Detection received at $request_context.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $request_context.event.severity\\nDescription: $request_context.event.description\"}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -572,8 +572,8 @@
         "value": ""
       },
       "position": {
-        "x": 134.664995270055,
-        "y": 162.1108876351587
+        "x": 138.4945071266826,
+        "y": 47.225531936329865
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -592,6 +592,17 @@
     }
   ],
   "branches": [
+    {
+      "destination_id": "96fe831b-0761-447d-b8f2-d292e249d88e",
+      "id": "fc1a73c0-c219-4e8d-9a88-fd84be0d9787",
+      "source_id": "ed3ff9d2-ae58-4041-9cf7-e37b0857be36",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
     {
       "destination_id": "3018a83d-387d-4241-b0a5-ffebd1767ade",
       "id": "1851588c-eb74-4007-a73d-8632348614b3",
@@ -632,17 +643,6 @@
       "label": "",
       "has_errors": false,
       "conditions": [],
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
-    },
-    {
-      "destination_id": "96fe831b-0761-447d-b8f2-d292e249d88e",
-      "id": "fc1a73c0-c219-4e8d-9a88-fd84be0d9787",
-      "source_id": "ed3ff9d2-ae58-4041-9cf7-e37b0857be36",
-      "label": "",
-      "has_errors": false,
-      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -785,8 +785,8 @@
         }
       ],
       "position": {
-        "x": -533.0126188306693,
-        "y": -511.26930112537616
+        "x": -333.87800228603265,
+        "y": -620.4103890392635
       },
       "priority": 0,
       "source_workflow": "",
