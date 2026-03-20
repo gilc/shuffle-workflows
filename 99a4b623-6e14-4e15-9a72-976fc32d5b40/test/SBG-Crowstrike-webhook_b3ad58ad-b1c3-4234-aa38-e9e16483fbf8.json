@@ -510,8 +510,8 @@
         "value": ""
       },
       "position": {
-        "x": 247.36681887832492,
-        "y": 420.24100169981267
+        "x": 216.2462350412871,
+        "y": 329.10214903420194
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -610,7 +610,7 @@
           "id": "",
           "name": "code",
           "example": "print(\"hello world\")",
-          "value": "import json\n\nraw = $request_context.raw\nescaped = json.dumps(raw)\n\nexit({\"escaped_raw\": escaped})",
+          "value": "import json\n\nraw = $request_context.raw\n\nprint(json.dumps(raw))",
           "multiline": true,
           "multiselect": false,
           "options": null,
