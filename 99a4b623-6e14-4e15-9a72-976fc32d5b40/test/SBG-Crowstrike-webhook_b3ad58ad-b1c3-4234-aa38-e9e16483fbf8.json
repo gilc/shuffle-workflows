@@ -352,7 +352,7 @@
       "id": "96fe831b-0761-447d-b8f2-d292e249d88e",
       "is_valid": true,
       "private_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
-      "label": "NOSHUT_Outlook_Office365_3",
+      "label": "send_email",
       "public": false,
       "generated": true,
       "environment": "Shuffle",
@@ -510,8 +510,8 @@
         "value": ""
       },
       "position": {
-        "x": 271.67911899590086,
-        "y": 330.47250895799414
+        "x": 247.36681887832492,
+        "y": 420.24100169981267
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -610,7 +610,7 @@
           "id": "",
           "name": "code",
           "example": "print(\"hello world\")",
-          "value": "import json\n\nraw = $request_context.raw\nescaped = json.dumps(raw)\n\nreturn {\"escaped_raw\": escaped}",
+          "value": "import json\n\nraw = $request_context.raw\nescaped = json.dumps(raw)\n\nexit({\"escaped_raw\": escaped})",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -688,6 +688,17 @@
       "source_parent": ""
     },
     {
+      "destination_id": "96fe831b-0761-447d-b8f2-d292e249d88e",
+      "id": "de2e4415-fef1-48b5-a829-5c34463cd3b0",
+      "source_id": "53c25c37-44ab-4167-a153-33a2fd140136",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
       "destination_id": "3b3f9694-5a82-47c1-ae43-64e846df9d71",
       "id": "acb4e843-6897-403d-94a3-7524a4189866",
       "source_id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
@@ -702,17 +713,6 @@
       "destination_id": "53c25c37-44ab-4167-a153-33a2fd140136",
       "id": "951ea1d3-8125-4896-9b6b-08033e061849",
       "source_id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
-      "label": "",
-      "has_errors": false,
-      "conditions": null,
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
-    },
-    {
-      "destination_id": "96fe831b-0761-447d-b8f2-d292e249d88e",
-      "id": "de2e4415-fef1-48b5-a829-5c34463cd3b0",
-      "source_id": "53c25c37-44ab-4167-a153-33a2fd140136",
       "label": "",
       "has_errors": false,
       "conditions": null,
