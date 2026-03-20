@@ -572,8 +572,8 @@
         "value": ""
       },
       "position": {
-        "x": 138.4945071266826,
-        "y": 47.225531936329865
+        "x": 170.3925487206463,
+        "y": 274.76489530660416
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -615,20 +615,20 @@
       "source_parent": ""
     },
     {
-      "destination_id": "d30c5ba1-562b-4563-bd8d-c9e92c3d65e6",
-      "id": "609bb060-76c5-4c14-8c3f-d6e111240fe4",
+      "destination_id": "ed3ff9d2-ae58-4041-9cf7-e37b0857be36",
+      "id": "211d1253-7e98-4aeb-b7fe-d01d26ff5220",
       "source_id": "2d8a0dc9-67cd-4621-8a4b-9562175e27cb",
       "label": "",
       "has_errors": false,
-      "conditions": [],
+      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
     },
     {
-      "destination_id": "ed3ff9d2-ae58-4041-9cf7-e37b0857be36",
-      "id": "e506cabb-fa29-4bdd-90ab-039f7d733468",
-      "source_id": "d30c5ba1-562b-4563-bd8d-c9e92c3d65e6",
+      "destination_id": "d30c5ba1-562b-4563-bd8d-c9e92c3d65e6",
+      "id": "609bb060-76c5-4c14-8c3f-d6e111240fe4",
+      "source_id": "2d8a0dc9-67cd-4621-8a4b-9562175e27cb",
       "label": "",
       "has_errors": false,
       "conditions": [],
@@ -785,8 +785,8 @@
         }
       ],
       "position": {
-        "x": -333.87800228603265,
-        "y": -620.4103890392635
+        "x": -374.93870351436686,
+        "y": -518.8391807375946
       },
       "priority": 0,
       "source_workflow": "",
