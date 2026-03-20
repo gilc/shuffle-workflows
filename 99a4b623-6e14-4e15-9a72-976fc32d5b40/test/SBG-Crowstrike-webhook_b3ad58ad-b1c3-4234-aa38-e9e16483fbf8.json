@@ -425,7 +425,7 @@
           "id": "",
           "name": "code",
           "example": "print(\"hello world\")",
-          "value": "import json\n\ntext = json.dumps($request_context.raw, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\ntext = text.replace(\"\\n\", \"\u003cbr\u003e\")\n\nprint(\"\u003cdiv style='font-family: Consolas, monospace; white-space: pre-wrap;'\u003e\" + text + \"\u003c/div\u003e\")",
+          "value": "import json\nimport html\n\ntext = json.dumps($request_context.raw, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\ntext = text.replace(\"\\n\", \"\u003cbr\u003e\")\n\nprint(\"\u003cdiv style='font-family: Consolas, monospace; white-space: pre-wrap;'\u003e\" + text + \"\u003c/div\u003e\")",
           "multiline": true,
           "multiselect": false,
           "options": null,
