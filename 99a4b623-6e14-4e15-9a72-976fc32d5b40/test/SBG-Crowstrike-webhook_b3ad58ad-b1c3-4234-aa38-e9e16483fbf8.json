@@ -363,7 +363,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\n  \"provider\": {\n    \"vendor\": \"CrowdStrike\",\n    \"product\": \"Falcon\"\n  },\n  \"event\": {\n    \"description\": \"$exec.data.data.description\",\n    \"severity_original\": \"$exec.data.data.Severity\"\n  },\n  \"raw\": {\n    \"body\": $exec\n  }\n}",
+          "value": "{\n  \"provider\": {\n    \"vendor\": \"CrowdStrike\",\n    \"product\": \"Falcon\"\n  },\n  \"event\": {\n    \"description\": \"$exec.data.data.Description\",\n    \"severity_original\": \"$exec.data.data.Severity\"\n  },\n  \"raw\": $exec\n}",
           "multiline": true,
           "multiselect": false,
           "options": null,
