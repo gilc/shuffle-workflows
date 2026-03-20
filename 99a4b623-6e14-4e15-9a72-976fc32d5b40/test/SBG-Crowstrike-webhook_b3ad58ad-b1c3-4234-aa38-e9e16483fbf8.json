@@ -464,7 +464,7 @@
           "value_replace": [
             {
               "key": "${subject}",
-              "value": "$request_context.event.description"
+              "value": "[SBG] $request_context.event.description"
             },
             {
               "key": "${target}",
