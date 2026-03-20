@@ -468,7 +468,7 @@
             },
             {
               "key": "${target}",
-              "value": ""
+              "value": "gilc@noshut.pt"
             },
             {
               "key": "${content}",
@@ -891,7 +891,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1773999124,
+  "edited": 1773999280,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
@@ -1072,17 +1072,27 @@
   "updated_by": "gilc@noshut.pt",
   "validated": false,
   "validation": {
-    "valid": true,
-    "changed_at": 1773985826000,
+    "valid": false,
+    "changed_at": 1773999216000,
     "last_valid": 1773985826000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "090d097e-39b2-4427-a7de-02a4315d442f",
+    "execution_id": "89272643-05f2-4ed0-a479-fac93a442236",
     "node_id": "",
-    "total_problems": 0,
-    "errors": [],
+    "total_problems": 1,
+    "errors": [
+      {
+        "order": 0,
+        "action_id": "62ce923f-d205-4786-a464-8c6ff38aac1d",
+        "app_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
+        "app_name": "NOSHUT_Outlook_Office365",
+        "error": "Status 415 for action 'send email'. Are the fields correct?",
+        "type": "configuration",
+        "waiting": false
+      }
+    ],
     "subflow_apps": []
   },
   "parentorg_workflow": "",
