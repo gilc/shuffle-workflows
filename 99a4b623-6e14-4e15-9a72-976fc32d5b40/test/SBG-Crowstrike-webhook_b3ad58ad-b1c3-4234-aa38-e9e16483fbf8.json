@@ -321,9 +321,9 @@
         }
       ],
       "execution_variable": {
-        "description": "",
-        "id": "",
-        "name": "No selection",
+        "description": "An execution variable",
+        "id": "96d0ce8f-2363-4e25-afc7-af3850ffd18f",
+        "name": "request_context",
         "value": ""
       },
       "position": {
@@ -451,8 +451,8 @@
         "value": ""
       },
       "position": {
-        "x": 146.66914008160094,
-        "y": 76.36527273577425
+        "x": 121.47319873850239,
+        "y": 2.877110485070156
       },
       "authentication_id": "",
       "category": "Other",
@@ -634,8 +634,8 @@
         "value": ""
       },
       "position": {
-        "x": 304.7310371807821,
-        "y": 308.33368611095534
+        "x": 283.7344193948666,
+        "y": 201.2509354027865
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
