@@ -708,6 +708,89 @@
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
+    },
+    {
+      "destination_id": "3018a83d-387d-4241-b0a5-ffebd1767ade",
+      "id": "afef92d1-2f40-4706-91be-4abd5b0b9d3d",
+      "source_id": "3b3f9694-5a82-47c1-ae43-64e846df9d71",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
+            "name": "source",
+            "example": "",
+            "value": "$build_request_context.event.severity",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
+            "name": "condition",
+            "example": "",
+            "value": "larger than",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
+            "name": "destination",
+            "example": "",
+            "value": "1",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
     }
   ],
   "visual_branches": [],
