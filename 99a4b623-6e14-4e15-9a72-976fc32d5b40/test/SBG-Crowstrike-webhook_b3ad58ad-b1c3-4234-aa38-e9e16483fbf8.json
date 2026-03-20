@@ -200,8 +200,8 @@
         "value": ""
       },
       "position": {
-        "x": -568.3216514374058,
-        "y": 297.2249835615381
+        "x": -532.8713518410666,
+        "y": 393.44722532302995
       },
       "authentication_id": "f56893f1-5e81-4bf6-ab2b-33b8bda30fd5",
       "category": "Communication",
@@ -264,8 +264,8 @@
         "value": ""
       },
       "position": {
-        "x": -289.1353080006177,
-        "y": 80.04726474551799
+        "x": -319.5212790831942,
+        "y": 176.26950650700982
       },
       "authentication_id": "",
       "category": "Other",
@@ -327,8 +327,8 @@
         "value": ""
       },
       "position": {
-        "x": -46.93183567965181,
-        "y": -387.9359740891078
+        "x": -140.6219131842623,
+        "y": -415.78978091480275
       },
       "authentication_id": "",
       "category": "Other",
@@ -386,7 +386,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\n  \"message\": {\n    \"subject\": \"$request_context.event.description\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"$request_context.raw\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"gilc@noshut.pt\"\n        }\n      }\n    ]  \n  }\n}",
+          "value": "{\n  \"message\": {\n    \"subject\": \"$request_context.event.description\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"gilc@noshut.pt\"\n        }\n      }\n    ]  \n  }\n}$stringify_raw_json",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -510,8 +510,8 @@
         "value": ""
       },
       "position": {
-        "x": 170.3925487206463,
-        "y": 274.76489530660416
+        "x": 271.67911899590086,
+        "y": 330.47250895799414
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -574,8 +574,70 @@
         "value": ""
       },
       "position": {
-        "x": -63.237363111146095,
-        "y": -154.84281287374253
+        "x": -58.17303459738335,
+        "y": -185.22878395631892
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Runs python with the data input. Any prints will be returned.",
+      "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
+      "errors": [],
+      "id": "53c25c37-44ab-4167-a153-33a2fd140136",
+      "is_valid": true,
+      "sharing": true,
+      "label": "stringify_raw_json",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The code to run. Can be a file ID from within Shuffle.",
+          "id": "",
+          "name": "code",
+          "example": "print(\"hello world\")",
+          "value": "import json\n\nraw = $request_context.raw\nescaped = json.dumps(raw)\n\nreturn {\"escaped_raw\": escaped}",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 146.66914008160094,
+        "y": 76.36527273577425
       },
       "authentication_id": "",
       "category": "Other",
@@ -616,19 +678,8 @@
     },
     {
       "destination_id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
-      "id": "280ba16a-0fcc-4e4d-a5f4-6bc00fbcbd92",
+      "id": "3f28e6e5-07fc-499d-9827-a08a1e91faf3",
       "source_id": "d30c5ba1-562b-4563-bd8d-c9e92c3d65e6",
-      "label": "",
-      "has_errors": false,
-      "conditions": null,
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
-    },
-    {
-      "destination_id": "96fe831b-0761-447d-b8f2-d292e249d88e",
-      "id": "6a91aecf-b37f-4e03-ac84-6348a154e557",
-      "source_id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
       "label": "",
       "has_errors": false,
       "conditions": null,
@@ -640,6 +691,28 @@
       "destination_id": "3b3f9694-5a82-47c1-ae43-64e846df9d71",
       "id": "acb4e843-6897-403d-94a3-7524a4189866",
       "source_id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "53c25c37-44ab-4167-a153-33a2fd140136",
+      "id": "951ea1d3-8125-4896-9b6b-08033e061849",
+      "source_id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "96fe831b-0761-447d-b8f2-d292e249d88e",
+      "id": "de2e4415-fef1-48b5-a829-5c34463cd3b0",
+      "source_id": "53c25c37-44ab-4167-a153-33a2fd140136",
       "label": "",
       "has_errors": false,
       "conditions": null,
@@ -785,8 +858,8 @@
         }
       ],
       "position": {
-        "x": -626.3672749429383,
-        "y": -821.6963235947375
+        "x": -588.3848110897177,
+        "y": -538.0939268240247
       },
       "priority": 0,
       "source_workflow": "",
@@ -1026,7 +1099,7 @@
     },
     "other": {
       "name": "",
-      "count": 3,
+      "count": 4,
       "id": "",
       "description": "",
       "large_image": ""
