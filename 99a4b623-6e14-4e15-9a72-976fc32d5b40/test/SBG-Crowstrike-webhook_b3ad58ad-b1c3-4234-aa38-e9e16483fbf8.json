@@ -238,7 +238,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\"message\":\"🚨 Detection received at $runtime_timestamp.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $request_context.event.severity\\nDescription: $request_context.event.description\"}",
+          "value": "{\"message\":\"🚨 Detection received at $runtime_timestamp.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $runtime_context.incident.severity\\nDescription: $runtime_context.incident.description\"}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -363,7 +363,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\n  \"provider\": {\n    \"vendor\": \"CrowdStrike\",\n    \"product\": \"Falcon\"\n  },\n  \"event\": {\n    \"description\": \"$exec.data.data.Description\",\n    \"severity\": \"$exec.data.data.Severity\"\n  },\n  \"raw\": $exec\n}",
+          "value": "{\"provider\":{\"vendor\":\"CrowdStrike\",\"product\":\"Falcon\"},\"incident\":{\"description\":\"empty for now\",\"severity\":\"0\"}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -384,8 +384,8 @@
       ],
       "execution_variable": {
         "description": "An execution variable",
-        "id": "96d0ce8f-2363-4e25-afc7-af3850ffd18f",
-        "name": "request_context",
+        "id": "75de85e0-8c3c-4d48-93c7-c8524e198da8",
+        "name": "runtime_context",
         "value": ""
       },
       "position": {
@@ -425,7 +425,7 @@
           "id": "",
           "name": "code",
           "example": "print(\"hello world\")",
-          "value": "import json\nimport html\nimport re\n\ntext = json.dumps($request_context.raw, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\n\n# preserve indentation: turn leading spaces on each line into \u0026nbsp;\nlines = []\nfor line in text.split(\"\\n\"):\n    m = re.match(r\"^( +)\", line)\n    if m:\n        n = len(m.group(1))\n        line = \"\u0026nbsp;\" * n + line[n:]\n    lines.append(line)\n\nbody = \"\u003cdiv style='font-family: Consolas, monospace; white-space: normal;'\u003e\" + \"\u003cbr\u003e\".join(lines) + \"\u003c/div\u003e\"\n\nprint(body)\n",
+          "value": "import json\nimport html\nimport re\n\ntext = json.dumps($exec, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\n\n# preserve indentation: turn leading spaces on each line into \u0026nbsp;\nlines = []\nfor line in text.split(\"\\n\"):\n    m = re.match(r\"^( +)\", line)\n    if m:\n        n = len(m.group(1))\n        line = \"\u0026nbsp;\" * n + line[n:]\n    lines.append(line)\n\nbody = \"\u003cdiv style='font-family: Consolas, monospace; white-space: normal;'\u003e\" + \"\u003cbr\u003e\".join(lines) + \"\u003c/div\u003e\"\n\nprint(body)\n",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -510,7 +510,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\"message\":{\"subject\":\"$request_context.event.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":[{\"emailAddress\":{\"address\":\"gilc@noshut.pt\"}},{\"emailAddress\":{\"address\":\"jpires@noshut.pt\"}}]}}",
+          "value": "{\"message\":{\"subject\":\"$runtime_context.incident.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":$workflow_mail_recipients}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -1023,7 +1023,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1774029504,
+  "edited": 1774264504,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
@@ -1086,25 +1086,25 @@
       "id": "9627faa0-7b2a-4f2f-a480-910e975e6d97",
       "name": "workflow_product",
       "value": "Falcon"
+    },
+    {
+      "description": "",
+      "id": "cd8bb433-fe8b-4a90-a7fe-9841c4d640ca",
+      "name": "$workflow_mail_recipients",
+      "value": "[{\"emailAddress\":{\"address\":\"gilc@noshut.pt\"}},{\"emailAddress\":{\"address\":\"jpires@noshut.pt\"}}]"
     }
   ],
   "execution_variables": [
     {
       "description": "An execution variable",
-      "id": "96d0ce8f-2363-4e25-afc7-af3850ffd18f",
-      "name": "request_context",
-      "value": ""
-    },
-    {
-      "description": "An execution variable",
-      "id": "1b9117d0-8d41-41a7-b655-6f6168245f3c",
-      "name": "timestamp",
-      "value": ""
-    },
-    {
-      "description": "An execution variable",
       "id": "f9f8301b-8110-4fd8-be16-464be386a8c9",
       "name": "runtime_timestamp",
+      "value": ""
+    },
+    {
+      "description": "An execution variable",
+      "id": "75de85e0-8c3c-4d48-93c7-c8524e198da8",
+      "name": "runtime_context",
       "value": ""
     }
   ],
@@ -1216,17 +1216,27 @@
   "updated_by": "gilc@noshut.pt",
   "validated": false,
   "validation": {
-    "valid": true,
-    "changed_at": 1774264357000,
-    "last_valid": 1774264357000,
+    "valid": false,
+    "changed_at": 1774458336000,
+    "last_valid": 1774453658000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "1e6c0ee6-e05e-4b20-b5c7-0d59eda39574",
+    "execution_id": "f877f20c-657c-46c2-82f8-78661ffcd285",
     "node_id": "",
-    "total_problems": 0,
-    "errors": [],
+    "total_problems": 1,
+    "errors": [
+      {
+        "order": 0,
+        "action_id": "53c25c37-44ab-4167-a153-33a2fd140136",
+        "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
+        "app_name": "Shuffle Tools",
+        "error": "Success is false: Check node for more failure details",
+        "type": "configuration",
+        "waiting": false
+      }
+    ],
     "subflow_apps": []
   },
   "parentorg_workflow": "",
