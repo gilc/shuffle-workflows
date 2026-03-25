@@ -10,7 +10,7 @@
       "id": "3018a83d-387d-4241-b0a5-ffebd1767ade",
       "is_valid": true,
       "private_id": "0a67232d3daeb76b278279f6b2269a97",
-      "label": "Telegram_Bot_1",
+      "label": "send_telegram_message",
       "public": false,
       "generated": true,
       "environment": "Shuffle",
@@ -352,7 +352,7 @@
       "id": "70e213f4-e9e9-44cc-b671-054a6ba444fc",
       "is_valid": true,
       "sharing": true,
-      "label": "build_request_context",
+      "label": "build_context",
       "public": true,
       "generated": false,
       "environment": "Shuffle",
@@ -476,7 +476,7 @@
       "id": "1fc7b248-7303-4a5c-bf7d-5a154d653846",
       "is_valid": true,
       "private_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
-      "label": "send_email_copy",
+      "label": "send_email",
       "public": false,
       "generated": true,
       "environment": "Shuffle",
@@ -634,8 +634,8 @@
         "value": ""
       },
       "position": {
-        "x": 283.7344193948666,
-        "y": 201.2509354027865
+        "x": 299.1990340282638,
+        "y": 294.03862320316944
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -722,7 +722,7 @@
             "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
             "name": "source",
             "example": "",
-            "value": "$build_request_context.event.severity",
+            "value": "$build_context.event.severity",
             "multiline": false,
             "multiselect": false,
             "options": null,
