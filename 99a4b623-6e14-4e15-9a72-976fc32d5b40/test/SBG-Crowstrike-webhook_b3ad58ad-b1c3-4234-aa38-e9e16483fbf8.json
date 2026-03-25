@@ -510,7 +510,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\"message\":{\"subject\":\"$runtime_context.incident.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":$workflow_mail_recipients}}",
+          "value": "{\"message\":{\"subject\":\"$runtime_context.incident.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":\"$workflow_mail_recipients\"}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
