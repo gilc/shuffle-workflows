@@ -425,7 +425,7 @@
           "id": "",
           "name": "code",
           "example": "print(\"hello world\")",
-          "value": "import json\nimport html\nimport re\n\ntext = json.dumps($exec, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\n\n# preserve indentation: turn leading spaces on each line into \u0026nbsp;\nlines = []\nfor line in text.split(\"\\n\"):\n    m = re.match(r\"^( +)\", line)\n    if m:\n        n = len(m.group(1))\n        line = \"\u0026nbsp;\" * n + line[n:]\n    lines.append(line)\n\nbody = \"\u003cdiv style='font-family: Consolas, monospace; white-space: normal;'\u003e\" + \"\u003cbr\u003e\".join(lines) + \"\u003c/div\u003e\"\n\nprint(body)\n",
+          "value": "import json\nimport html\nimport re\n\nraw = \"\"\"$exec\"\"\"\ndata = json.loads(raw)\n\ntext = json.dumps(data, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\n\nlines = []\nfor line in text.split(\"\\n\"):\n    m = re.match(r\"^( +)\", line)\n    if m:\n        n = len(m.group(1))\n        line = \"\u0026nbsp;\" * n + line[n:]\n    lines.append(line)\n\nbody = \"\u003cdiv style='font-family: Consolas, monospace; white-space: normal;'\u003e\" + \"\u003cbr\u003e\".join(lines) + \"\u003c/div\u003e\"\n\nprint(body)",
           "multiline": true,
           "multiselect": false,
           "options": null,
