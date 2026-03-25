@@ -1090,7 +1090,7 @@
     {
       "description": "",
       "id": "cd8bb433-fe8b-4a90-a7fe-9841c4d640ca",
-      "name": "$workflow_mail_recipients",
+      "name": "workflow_mail_recipients",
       "value": "[{\"emailAddress\":{\"address\":\"gilc@noshut.pt\"}},{\"emailAddress\":{\"address\":\"jpires@noshut.pt\"}}]"
     }
   ],
