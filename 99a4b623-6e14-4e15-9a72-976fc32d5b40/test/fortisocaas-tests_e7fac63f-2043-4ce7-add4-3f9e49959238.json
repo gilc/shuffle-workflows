@@ -550,8 +550,8 @@
         "value": ""
       },
       "position": {
-        "x": 698.1190020398128,
-        "y": 481.30519459667136
+        "x": 688.2050163381736,
+        "y": 638.6897176101946
       },
       "authentication_id": "",
       "example": "{\n  \"status\": 200,\n  \"body\": {\n    \"example\": \"json\"\n    \"data\": \"json\"\n  },\n  \"url\": \"https://example.com\",\n  \"headers\": {\n    \"Content-Type\": \"application/json\"\n  },\n  \"cookies\": {},\n  \"success\": true\n}\n",
