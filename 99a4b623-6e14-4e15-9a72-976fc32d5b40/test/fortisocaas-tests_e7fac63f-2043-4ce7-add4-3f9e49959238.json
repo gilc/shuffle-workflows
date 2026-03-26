@@ -357,7 +357,7 @@
           "id": "",
           "name": "headers",
           "example": "Content-Type: application/json",
-          "value": "Content-Type: application/json\nX-Auth-Token: $http_1.body.access_token",
+          "value": "Content-Type: application/json\nAuthorization: Bearer $http_1.body.access_token",
           "multiline": true,
           "multiselect": false,
           "options": null,
