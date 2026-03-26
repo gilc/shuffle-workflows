@@ -425,7 +425,7 @@
           "id": "",
           "name": "code",
           "example": "print(\"hello world\")",
-          "value": "import json\nimport html\nimport re\n\nraw = \"\"\"$exec\"\"\"\ndata = json.loads(raw)\n\ntext = json.dumps(data, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\n\nlines = []\nfor line in text.split(\"\\n\"):\n    m = re.match(r\"^( +)\", line)\n    if m:\n        n = len(m.group(1))\n        line = \"\u0026nbsp;\" * n + line[n:]\n    lines.append(line)\n\nbody = \"\u003cdiv style='font-family: Consolas, monospace; white-space: normal;'\u003e\" + \"\u003cbr\u003e\".join(lines) + \"\u003c/div\u003e\"\n\nprint(body)",
+          "value": "import json\nimport html\nimport re\n\nraw = r'''$exec'''\ndata = json.loads(raw)\n\ntext = json.dumps(data, indent=2, ensure_ascii=False)\ntext = text.replace('\"', \"'\")\ntext = html.escape(text)\n\nlines = []\nfor line in text.split(\"\\n\"):\n    m = re.match(r\"^( +)\", line)\n    if m:\n        n = len(m.group(1))\n        line = \"\u0026nbsp;\" * n + line[n:]\n    lines.append(line)\n\nbody = \"\u003cdiv style='font-family: Consolas, monospace; white-space: normal;'\u003e\" + \"\u003cbr\u003e\".join(lines) + \"\u003c/div\u003e\"\n\nprint(body)",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -1023,7 +1023,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1774264504,
+  "edited": 1774459441,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
@@ -1216,27 +1216,17 @@
   "updated_by": "gilc@noshut.pt",
   "validated": false,
   "validation": {
-    "valid": false,
-    "changed_at": 1774458336000,
-    "last_valid": 1774453658000,
+    "valid": true,
+    "changed_at": 1774521850000,
+    "last_valid": 1774521850000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "f877f20c-657c-46c2-82f8-78661ffcd285",
+    "execution_id": "18924744-53f6-433b-8882-d3aceb981686",
     "node_id": "",
-    "total_problems": 1,
-    "errors": [
-      {
-        "order": 0,
-        "action_id": "53c25c37-44ab-4167-a153-33a2fd140136",
-        "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
-        "app_name": "Shuffle Tools",
-        "error": "Success is false: Check node for more failure details",
-        "type": "configuration",
-        "waiting": false
-      }
-    ],
+    "total_problems": 0,
+    "errors": [],
     "subflow_apps": []
   },
   "parentorg_workflow": "",
