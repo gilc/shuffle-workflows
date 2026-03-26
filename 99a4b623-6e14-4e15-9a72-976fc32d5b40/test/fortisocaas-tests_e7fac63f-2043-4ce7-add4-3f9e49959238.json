@@ -313,6 +313,259 @@
       "parent_controlled": false,
       "source_workflow": "",
       "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Runs a GET request towards the specified endpoint",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "dae96457-9f5f-4aff-9be0-fc755aa38220",
+      "is_valid": true,
+      "sharing": true,
+      "label": "http_1_copy",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "GET",
+      "parameters": [
+        {
+          "description": "The URL to get",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://socaas.mss.fortinet.com/socaasAPI/v1/alert",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthentication: Bearer $http_1.body.access_token",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Check certificate",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Makes the response into a file, and returns it as an ID",
+          "id": "",
+          "name": "to_file",
+          "example": "true",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 698.1190020398128,
+        "y": 481.30519459667136
+      },
+      "authentication_id": "",
+      "example": "{\n  \"status\": 200,\n  \"body\": {\n    \"example\": \"json\"\n    \"data\": \"json\"\n  },\n  \"url\": \"https://example.com\",\n  \"headers\": {\n    \"Content-Type\": \"application/json\"\n  },\n  \"cookies\": {},\n  \"success\": true\n}\n",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
     }
   ],
   "branches": [
@@ -320,6 +573,17 @@
       "destination_id": "9ed3bca0-9bb8-4f2e-8f38-3b8561acff21",
       "id": "c3145d25-59bd-48d6-8920-afd74ca99aa6",
       "source_id": "fa1a59f5-d0db-4968-8b38-3512beeb9872",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "dae96457-9f5f-4aff-9be0-fc755aa38220",
+      "id": "34fa5b2e-2cdd-46dc-984c-1699f938fd45",
+      "source_id": "9ed3bca0-9bb8-4f2e-8f38-3b8561acff21",
       "label": "",
       "has_errors": false,
       "conditions": null,
@@ -446,7 +710,7 @@
     },
     "other": {
       "name": "",
-      "count": 1,
+      "count": 2,
       "id": "",
       "description": "",
       "large_image": ""
