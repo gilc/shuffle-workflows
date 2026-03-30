@@ -68,7 +68,7 @@
           "id": "",
           "name": "headers",
           "example": "Content-Type=application/json\nAccept=application/json\r\n",
-          "value": "Content-type=application/jsonContent-Type=application/jsonAccept=application/json",
+          "value": "Content-type=application/json\nAccept=application/json",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -198,7 +198,7 @@
     "skip_notifications": false
   },
   "created": 1774871438,
-  "edited": 1774871488,
+  "edited": 1774871569,
   "last_runtime": 0,
   "due_date": 0,
   "id": "e50e8d02-6ae1-4114-8959-de43c6991d10",
@@ -341,16 +341,26 @@
   "validated": false,
   "validation": {
     "valid": false,
-    "changed_at": 0,
+    "changed_at": 1774871601000,
     "last_valid": 0,
-    "validation_ran": false,
+    "validation_ran": true,
     "notifications_created": 0,
-    "environment": "",
+    "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "",
+    "execution_id": "87624e8f-9a17-453b-a6b2-137f289e12ac",
     "node_id": "",
-    "total_problems": 0,
-    "errors": [],
+    "total_problems": 1,
+    "errors": [
+      {
+        "order": 0,
+        "action_id": "08574e58-9797-4ac8-8e21-570dd129f1cc",
+        "app_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
+        "app_name": "NOSHUT_Outlook_Office365",
+        "error": "Status 415 for action 'NOSHUT Outlook Office365 1'. Are the fields correct?",
+        "type": "configuration",
+        "waiting": false
+      }
+    ],
     "subflow_apps": []
   },
   "parentorg_workflow": "",
