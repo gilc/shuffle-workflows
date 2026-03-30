@@ -1,0 +1,299 @@
+{
+  "workflow_as_code": false,
+  "actions": [
+    {
+      "app_name": "Singul",
+      "app_version": "1.0.0",
+      "description": "Available actions for communication",
+      "app_id": "integration",
+      "errors": [],
+      "id": "bbef858d-bde3-4f72-9fd5-e91bcff0a7b6",
+      "is_valid": true,
+      "isStartNode": true,
+      "label": "Send Notification Message",
+      "public": false,
+      "generated": false,
+      "environment": "Cloud",
+      "name": "Communication",
+      "parameters": [
+        {
+          "description": "",
+          "id": "",
+          "name": "action",
+          "example": "",
+          "value": "send_message",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "list_messages",
+            "get_message",
+            "send_message",
+            "search_messages",
+            "list_attachments",
+            "get_attachment",
+            "create_contact",
+            "get_contact"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": ""
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "",
+          "id": "",
+          "name": "fields",
+          "example": "",
+          "value": "[object Object],[object Object],[object Object],[object Object]",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": ""
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "",
+          "id": "",
+          "name": "app_name",
+          "example": "",
+          "value": "NOSHUT_Outlook_Office365",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": ""
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 67.96428571428578,
+        "y": 263.14385714285714
+      },
+      "authentication_id": "",
+      "category": "",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    }
+  ],
+  "branches": [],
+  "visual_branches": null,
+  "triggers": [],
+  "comments": [],
+  "configuration": {
+    "exit_on_error": false,
+    "start_from_top": false,
+    "skip_notifications": false
+  },
+  "created": 0,
+  "edited": 0,
+  "last_runtime": 0,
+  "due_date": 0,
+  "id": "e50e8d02-6ae1-4114-8959-de43c6991d10",
+  "is_valid": true,
+  "name": "[GENERATED] NOSHUT_Outlook_Office365 notification workflow",
+  "description": "",
+  "start": "",
+  "owner": "",
+  "sharing": "",
+  "execution_org": {
+    "name": "NOSHUT",
+    "id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
+    "users": null,
+    "role": "",
+    "child_orgs": null,
+    "region_url": "",
+    "is_partner": false,
+    "image": "",
+    "creator_org": "",
+    "branding": {
+      "enable_chat": false,
+      "home_url": "",
+      "theme": "",
+      "documentation_link": "",
+      "global_user": false,
+      "support_email": "",
+      "logout_url": "",
+      "brand_color": "",
+      "brand_name": ""
+    }
+  },
+  "org_id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
+  "workflow_variables": null,
+  "execution_environment": "",
+  "previously_saved": true,
+  "categories": {
+    "siem": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "communication": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "assets": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "cases": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "network": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "intel": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "edr": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "iam": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "ai": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "email": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "other": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    }
+  },
+  "example_argument": "",
+  "public": false,
+  "default_return_value": "",
+  "contact_info": {
+    "name": "",
+    "url": ""
+  },
+  "published_id": "",
+  "revision_id": "",
+  "usecase_ids": null,
+  "input_questions": null,
+  "form_control": {
+    "input_markdown": "",
+    "output_yields": null,
+    "cleanup_actions": null,
+    "form_width": 0
+  },
+  "blogpost": "",
+  "video": "",
+  "status": "test",
+  "workflow_type": "",
+  "generated": false,
+  "hidden": false,
+  "background_processing": false,
+  "updated_by": "gilc@noshut.pt",
+  "validated": false,
+  "validation": {
+    "valid": false,
+    "changed_at": 0,
+    "last_valid": 0,
+    "validation_ran": false,
+    "notifications_created": 0,
+    "environment": "",
+    "workflow_id": "",
+    "execution_id": "",
+    "node_id": "",
+    "total_problems": 0,
+    "errors": null,
+    "subflow_apps": null
+  },
+  "parentorg_workflow": "",
+  "childorg_workflow_ids": null,
+  "suborg_distribution": [],
+  "backup_config": {
+    "onprem_backup": false,
+    "upload_repo": "",
+    "upload_branch": "",
+    "upload_username": "",
+    "upload_token": "",
+    "tokens_encrypted": false
+  },
+  "auth_groups": null
+}
