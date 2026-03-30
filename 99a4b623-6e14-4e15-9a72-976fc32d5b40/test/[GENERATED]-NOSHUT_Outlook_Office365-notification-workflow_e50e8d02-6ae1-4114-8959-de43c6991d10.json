@@ -120,7 +120,7 @@
     }
   ],
   "branches": [],
-  "visual_branches": null,
+  "visual_branches": [],
   "triggers": [],
   "comments": [],
   "configuration": {
@@ -128,8 +128,8 @@
     "start_from_top": false,
     "skip_notifications": false
   },
-  "created": 0,
-  "edited": 0,
+  "created": 1774871438,
+  "edited": 1774871438,
   "last_runtime": 0,
   "due_date": 0,
   "id": "e50e8d02-6ae1-4114-8959-de43c6991d10",
@@ -281,8 +281,8 @@
     "execution_id": "",
     "node_id": "",
     "total_problems": 0,
-    "errors": null,
-    "subflow_apps": null
+    "errors": [],
+    "subflow_apps": []
   },
   "parentorg_workflow": "",
   "childorg_workflow_ids": null,
