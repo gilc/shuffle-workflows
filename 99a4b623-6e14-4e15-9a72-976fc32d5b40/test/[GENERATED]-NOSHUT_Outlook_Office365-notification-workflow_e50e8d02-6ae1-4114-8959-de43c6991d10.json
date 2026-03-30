@@ -10,7 +10,7 @@
       "id": "bbef858d-bde3-4f72-9fd5-e91bcff0a7b6",
       "is_valid": true,
       "isStartNode": true,
-      "label": "Send Notification Message",
+      "label": "Send_Notification_Message",
       "public": false,
       "generated": false,
       "environment": "Cloud",
@@ -136,7 +136,7 @@
   "is_valid": true,
   "name": "[GENERATED] NOSHUT_Outlook_Office365 notification workflow",
   "description": "",
-  "start": "",
+  "start": "bbef858d-bde3-4f72-9fd5-e91bcff0a7b6",
   "owner": "",
   "sharing": "",
   "execution_org": {
