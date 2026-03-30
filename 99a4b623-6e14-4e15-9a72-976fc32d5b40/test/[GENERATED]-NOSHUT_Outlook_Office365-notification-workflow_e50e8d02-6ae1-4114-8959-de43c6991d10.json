@@ -45,7 +45,7 @@
           "id": "",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
+          "value": "{\"message\":{\"subject\":\"$exec.title\",\"body\":{\"contentType\":\"Text\",\"content\":\"$exec.description\"},\"toRecipients\":[{\"emailAddress\":{\"address\":\"gilc@noshut.pt\"}},{\"emailAddress\":{\"address\":\"jpires@noshut.pt\"}}]}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -198,7 +198,7 @@
     "skip_notifications": false
   },
   "created": 1774871438,
-  "edited": 1774871569,
+  "edited": 1774871682,
   "last_runtime": 0,
   "due_date": 0,
   "id": "e50e8d02-6ae1-4114-8959-de43c6991d10",
@@ -341,13 +341,13 @@
   "validated": false,
   "validation": {
     "valid": false,
-    "changed_at": 1774871601000,
+    "changed_at": 1774871695000,
     "last_valid": 0,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "87624e8f-9a17-453b-a6b2-137f289e12ac",
+    "execution_id": "08378b6a-a365-4e9a-b9f4-42c2536664f0",
     "node_id": "",
     "total_problems": 1,
     "errors": [
@@ -356,7 +356,7 @@
         "action_id": "08574e58-9797-4ac8-8e21-570dd129f1cc",
         "app_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
         "app_name": "NOSHUT_Outlook_Office365",
-        "error": "Status 415 for action 'NOSHUT Outlook Office365 1'. Are the fields correct?",
+        "error": "Status 400 for action 'NOSHUT Outlook Office365 1'. Are the fields correct?",
         "type": "configuration",
         "waiting": false
       }
