@@ -799,7 +799,7 @@
       "app_name": "Webhook",
       "description": "Custom HTTP input trigger",
       "long_description": "Execute a workflow with an unauthicated POST request",
-      "status": "stopped",
+      "status": "running",
       "app_version": "1.0.0",
       "errors": [],
       "id": "167e4a31-fbb4-5e19-aa3c-3f965fd988ea",
@@ -818,7 +818,7 @@
           "id": "",
           "name": "url",
           "example": "",
-          "value": "http://localhost:3001/api/v1/hooks/webhook_167e4a31-fbb4-5e19-aa3c-3f965fd988ea",
+          "value": "https://shpath9696.noshut.pt/api/v1/hooks/webhook_167e4a31-fbb4-5e19-aa3c-3f965fd988ea",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -1023,7 +1023,7 @@
     "skip_notifications": false
   },
   "created": 1774975298,
-  "edited": 1774975298,
+  "edited": 1774975326,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "02c3679b-0f7a-496b-9400-767f28e02905",
@@ -1226,8 +1226,8 @@
     "execution_id": "",
     "node_id": "",
     "total_problems": 0,
-    "errors": null,
-    "subflow_apps": null
+    "errors": [],
+    "subflow_apps": []
   },
   "parentorg_workflow": "",
   "childorg_workflow_ids": null,
