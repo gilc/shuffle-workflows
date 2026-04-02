@@ -363,7 +363,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\"provider\":{\"vendor\":\"CrowdStrike\",\"product\":\"Falcon\"},\"incident\":{\"description\":\"empty for now\",\"severity\":\"0\"}}",
+          "value": "{\"provider\":{\"vendor\":\"CrowdStrike\",\"product\":\"Falcon\"},\"detection\":{\"description\":\"$exec.data.data.Description\",\"severity\":\"$exec.data.data.Severity\",\"severityDisplayName\":\"$exec.data.data.SeverityDisplayName\"}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -510,7 +510,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\"message\":{\"subject\":\"$runtime_context.incident.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":$workflow_mail_recipients}}",
+          "value": "{\"message\":{\"subject\":\"DETECTION: $runtime_context.detection.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":$workflow_mail_recipients}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -1095,13 +1095,13 @@
       "type": "COMMENT",
       "is_valid": true,
       "decorator": true,
-      "width": 497,
+      "width": 350,
       "height": 75,
       "color": "#ffffff",
       "backgroundcolor": "#1f2023",
       "position": {
-        "x": -409.999,
-        "y": -618.999
+        "x": -343.63819788759224,
+        "y": -602.8134385091689
       }
     }
   ],
@@ -1111,7 +1111,7 @@
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1774975349,
+  "edited": 1775125185,
   "last_runtime": 0,
   "due_date": 1773100800,
   "errors": [
