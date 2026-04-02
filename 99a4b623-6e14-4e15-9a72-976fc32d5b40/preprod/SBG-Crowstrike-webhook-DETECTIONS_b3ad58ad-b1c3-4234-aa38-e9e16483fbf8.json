@@ -238,7 +238,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\"message\":\"🚨 Detection received at $runtime_timestamp.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $runtime_context.incident.severity\\nDescription: $runtime_context.incident.description\"}",
+          "value": "{\"message\":\"🚨 Detection received at $runtime_timestamp.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $runtime_context.detection.severity\\nDescription: $runtime_context.detection.description\"}",
           "multiline": true,
           "multiselect": false,
           "options": null,
