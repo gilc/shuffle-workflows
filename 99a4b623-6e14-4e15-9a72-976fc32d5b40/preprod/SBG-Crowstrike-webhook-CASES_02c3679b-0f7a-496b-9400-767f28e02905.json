@@ -1023,9 +1023,12 @@
     "skip_notifications": false
   },
   "created": 1774975298,
-  "edited": 1775126846,
+  "edited": 1775126866,
   "last_runtime": 0,
   "due_date": 1773100800,
+  "tags": [
+    "SBG"
+  ],
   "id": "02c3679b-0f7a-496b-9400-767f28e02905",
   "is_valid": true,
   "name": "SBG Crowstrike webhook CASES",
