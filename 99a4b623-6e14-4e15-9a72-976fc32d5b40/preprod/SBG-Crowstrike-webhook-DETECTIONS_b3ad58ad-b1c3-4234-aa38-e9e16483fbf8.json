@@ -327,8 +327,8 @@
         "value": ""
       },
       "position": {
-        "x": -140.6219131842623,
-        "y": -415.78978091480275
+        "x": -116.08155614431193,
+        "y": -430.22528505595005
       },
       "authentication_id": "",
       "category": "Other",
@@ -389,8 +389,8 @@
         "value": ""
       },
       "position": {
-        "x": -58.17303459738335,
-        "y": -185.22878395631892
+        "x": -63.94723625384226,
+        "y": -128.93031780584448
       },
       "authentication_id": "",
       "category": "Other",
@@ -671,7 +671,79 @@
       "source_id": "2d8a0dc9-67cd-4621-8a4b-9562175e27cb",
       "label": "",
       "has_errors": false,
-      "conditions": [],
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "087cbb79-b9a2-4593-bbb5-948e46b155cb",
+            "name": "source",
+            "example": "",
+            "value": "$exec.meta.trigger_name",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "087cbb79-b9a2-4593-bbb5-948e46b155cb",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "087cbb79-b9a2-4593-bbb5-948e46b155cb",
+            "name": "destination",
+            "example": "",
+            "value": "Detection",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -1016,16 +1088,35 @@
       "replacement_for_trigger": ""
     }
   ],
-  "comments": [],
+  "comments": [
+    {
+      "id": "3a783e02-23ef-4858-b719-4d5fbdcb04ab",
+      "label": "Apenas trigger name = Detection",
+      "type": "COMMENT",
+      "is_valid": true,
+      "decorator": true,
+      "width": 497,
+      "height": 75,
+      "color": "#ffffff",
+      "backgroundcolor": "#1f2023",
+      "position": {
+        "x": -409.999,
+        "y": -618.999
+      }
+    }
+  ],
   "configuration": {
     "exit_on_error": false,
     "start_from_top": false,
     "skip_notifications": false
   },
   "created": 1770132607,
-  "edited": 1774522299,
+  "edited": 1774975349,
   "last_runtime": 0,
   "due_date": 1773100800,
+  "errors": [
+    "Trigger Webhook needs to be started"
+  ],
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
   "is_valid": true,
   "name": "SBG Crowstrike webhook DETECTIONS",
@@ -1216,18 +1307,18 @@
   "updated_by": "gilc@noshut.pt",
   "validated": false,
   "validation": {
-    "valid": false,
-    "changed_at": 0,
-    "last_valid": 0,
-    "validation_ran": false,
+    "valid": true,
+    "changed_at": 1775123931000,
+    "last_valid": 1775123931000,
+    "validation_ran": true,
     "notifications_created": 0,
-    "environment": "",
+    "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "",
+    "execution_id": "4fb20f7d-7843-4139-92e5-d8cc6cbf1706",
     "node_id": "",
     "total_problems": 0,
-    "errors": null,
-    "subflow_apps": null
+    "errors": [],
+    "subflow_apps": []
   },
   "parentorg_workflow": "",
   "childorg_workflow_ids": null,
