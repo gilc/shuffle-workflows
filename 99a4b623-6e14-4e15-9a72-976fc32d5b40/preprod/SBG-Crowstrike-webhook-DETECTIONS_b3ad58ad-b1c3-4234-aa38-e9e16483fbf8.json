@@ -871,7 +871,7 @@
       "app_name": "Webhook",
       "description": "Custom HTTP input trigger",
       "long_description": "Execute a workflow with an unauthicated POST request",
-      "status": "SUCCESS",
+      "status": "running",
       "app_version": "1.0.0",
       "errors": [],
       "id": "2d8a0dc9-67cd-4621-8a4b-9562175e27cb",
@@ -890,7 +890,7 @@
           "id": "",
           "name": "url",
           "example": "",
-          "value": "https://100.65.10.1/api/v1/hooks/webhook_2d8a0dc9-67cd-4621-8a4b-9562175e27cb",
+          "value": "https://shpath9696.noshut.pt/api/v1/hooks/webhook_2d8a0dc9-67cd-4621-8a4b-9562175e27cb",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -1114,9 +1114,6 @@
   "edited": 1775125185,
   "last_runtime": 0,
   "due_date": 1773100800,
-  "errors": [
-    "Trigger Webhook needs to be started"
-  ],
   "id": "b3ad58ad-b1c3-4234-aa38-e9e16483fbf8",
   "is_valid": true,
   "name": "SBG Crowstrike webhook DETECTIONS",
