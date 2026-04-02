@@ -238,7 +238,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\"message\":\"🚨 Detection received at $runtime_timestamp.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $runtime_context.incident.severity\\nDescription: $runtime_context.incident.description\"}",
+          "value": "{\"message\":\"🚨 Detection received at $runtime_timestamp.received_at\\nCustomer: $workflow_customer\\nChannel: $workflow_channel\\nVendor: $workflow_vendor\\nProduct: $workflow_product\\nSeverity: $runtime_context.case.severity\\nDescription: $runtime_context.case.description\"}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -363,7 +363,7 @@
           "id": "",
           "name": "call",
           "example": "REPEATING: Hello world",
-          "value": "{\"provider\":{\"vendor\":\"CrowdStrike\",\"product\":\"Falcon\"},\"incident\":{\"description\":\"empty for now\",\"severity\":\"0\"}}",
+          "value": "{\"provider\":{\"vendor\":\"CrowdStrike\",\"product\":\"Falcon\"},\"case\":{\"description\":\"$exec.data.dataTriggerCase01.Description\",\"severity\":\"$exec.data.dataTriggerCase01.SeverityValue\"}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -510,7 +510,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
-          "value": "{\"message\":{\"subject\":\"$runtime_context.incident.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":$workflow_mail_recipients}}",
+          "value": "{\"message\":{\"subject\":\"CASE: $runtime_context.case.description\",\"body\":{\"contentType\":\"HTML\",\"content\":\"$stringify_raw_json.message\u003cbr\u003e\"},\"toRecipients\":$workflow_mail_recipients}}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -671,7 +671,79 @@
       "source_id": "167e4a31-fbb4-5e19-aa3c-3f965fd988ea",
       "label": "",
       "has_errors": false,
-      "conditions": [],
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "bc10962c-2bd1-488d-95e1-c48b5e9faaaa",
+            "name": "source",
+            "example": "",
+            "value": "$exec.meta.trigger_name",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "bc10962c-2bd1-488d-95e1-c48b5e9faaaa",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "bc10962c-2bd1-488d-95e1-c48b5e9faaaa",
+            "name": "destination",
+            "example": "",
+            "value": "Case",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -715,79 +787,7 @@
       "source_id": "3b3f9694-5a82-47c1-ae43-64e846df9d71",
       "label": "",
       "has_errors": false,
-      "conditions": [
-        {
-          "source": {
-            "description": "",
-            "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
-            "name": "source",
-            "example": "",
-            "value": "$build_context.event.severity",
-            "multiline": false,
-            "multiselect": false,
-            "options": null,
-            "action_field": "",
-            "variant": "STATIC_VALUE",
-            "required": false,
-            "configuration": false,
-            "tags": null,
-            "schema": {
-              "type": ""
-            },
-            "skip_multicheck": false,
-            "value_replace": null,
-            "unique_toggled": false,
-            "error": "",
-            "hidden": false
-          },
-          "condition": {
-            "description": "",
-            "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
-            "name": "condition",
-            "example": "",
-            "value": "larger than",
-            "multiline": false,
-            "multiselect": false,
-            "options": null,
-            "action_field": "",
-            "variant": "",
-            "required": false,
-            "configuration": false,
-            "tags": null,
-            "schema": {
-              "type": ""
-            },
-            "skip_multicheck": false,
-            "value_replace": null,
-            "unique_toggled": false,
-            "error": "",
-            "hidden": false
-          },
-          "destination": {
-            "description": "",
-            "id": "0bba85c1-4f6a-4c57-ac49-7a268585209c",
-            "name": "destination",
-            "example": "",
-            "value": "1",
-            "multiline": false,
-            "multiselect": false,
-            "options": null,
-            "action_field": "",
-            "variant": "STATIC_VALUE",
-            "required": false,
-            "configuration": false,
-            "tags": null,
-            "schema": {
-              "type": ""
-            },
-            "skip_multicheck": false,
-            "value_replace": null,
-            "unique_toggled": false,
-            "error": "",
-            "hidden": false
-          }
-        }
-      ],
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -930,8 +930,8 @@
         }
       ],
       "position": {
-        "x": -625.5276682325748,
-        "y": -438.0939268240248
+        "x": -648.3848110897177,
+        "y": -595.236783966882
       },
       "priority": 0,
       "source_workflow": "",
@@ -1023,7 +1023,7 @@
     "skip_notifications": false
   },
   "created": 1774975298,
-  "edited": 1774975326,
+  "edited": 1774975608,
   "last_runtime": 0,
   "due_date": 1773100800,
   "id": "02c3679b-0f7a-496b-9400-767f28e02905",
