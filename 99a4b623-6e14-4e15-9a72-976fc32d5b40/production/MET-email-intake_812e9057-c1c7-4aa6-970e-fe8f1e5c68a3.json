@@ -896,7 +896,7 @@
           "id": "",
           "name": "body",
           "example": "{\n  \"destinationId\": \"deleteditems\"\n}",
-          "value": "{\n  \"destinationId\": \"AAMkADhiYTE0MjdiLTVlYmMtNGFiYS1hY2Q3LTRmNTU0MzU3MDljMgAuAAAAAABKebG-EwQ_SLsT9xbwWQ7WAQCMHQ-UN7cqQJaxmD9OEvw0AAAAPZ5aAAA=\"\n}",
+          "value": "{\"destinationId\":\"$O365_processed_folder\"}",
           "multiline": true,
           "multiselect": false,
           "options": null,
