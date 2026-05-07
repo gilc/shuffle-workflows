@@ -1423,7 +1423,7 @@
       "app_name": "Schedule",
       "description": "Schedule time trigger",
       "long_description": "Create a schedule based on cron",
-      "status": "stopped",
+      "status": "running",
       "app_version": "1.0.0",
       "errors": [],
       "id": "bc5680a7-1bc8-5eef-a4e9-26feda358916",
@@ -1442,7 +1442,7 @@
           "id": "",
           "name": "cron",
           "example": "",
-          "value": "* * * * *",
+          "value": "*/5 * * * *",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -1581,9 +1581,6 @@
   "edited": 1778154442,
   "last_runtime": 0,
   "due_date": 1778022000,
-  "errors": [
-    "Trigger Schedule needs to be started"
-  ],
   "id": "812e9057-c1c7-4aa6-970e-fe8f1e5c68a3",
   "is_valid": true,
   "name": "MET email intake",
