@@ -1423,7 +1423,7 @@
       "app_name": "Schedule",
       "description": "Schedule time trigger",
       "long_description": "Create a schedule based on cron",
-      "status": "stopped",
+      "status": "running",
       "app_version": "1.0.0",
       "errors": [],
       "id": "395d366d-b69c-4e21-bdf6-f1083c57b29f",
@@ -1581,9 +1581,6 @@
   "edited": 1778156481,
   "last_runtime": 0,
   "due_date": 1778022000,
-  "errors": [
-    "Trigger Schedule needs to be started"
-  ],
   "id": "dd5fef6a-75c2-4e20-be15-aa3b4b05a016",
   "is_valid": true,
   "name": "SBG email intake",
