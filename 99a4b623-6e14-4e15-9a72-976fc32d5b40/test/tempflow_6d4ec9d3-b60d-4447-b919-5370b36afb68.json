@@ -158,11 +158,15 @@
             },
             {
               "key": "${alert_severity_id}",
-              "value": "High"
+              "value": "4"
             },
             {
               "key": "${alert_source_link}",
               "value": "https://socaas.mss.fortinet.com/socaas/cli_out/#/sec/incident-response/alerts/f89b4dbc-53fb-4326-bb5f-ba95d2be1db9"
+            },
+            {
+              "key": "${alert_status_id}",
+              "value": "3"
             }
           ],
           "unique_toggled": false,
@@ -314,7 +318,7 @@
     "skip_notifications": false
   },
   "created": 1779272553,
-  "edited": 1779277485,
+  "edited": 1779277613,
   "last_runtime": 0,
   "due_date": 0,
   "id": "6d4ec9d3-b60d-4447-b919-5370b36afb68",
@@ -457,13 +461,13 @@
   "validated": false,
   "validation": {
     "valid": false,
-    "changed_at": 1779277494000,
+    "changed_at": 1779277616000,
     "last_valid": 1779273130000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "f33a62b0-4173-4a07-b099-26f04b65948e",
+    "execution_id": "7c30983a-9448-45d7-95d0-82f35ff01005",
     "node_id": "",
     "total_problems": 1,
     "errors": [
@@ -472,8 +476,8 @@
         "action_id": "86433831-8766-41d3-99fe-0985e08f2e46",
         "app_id": "7847fb269844353af35cdc7eaeb05ef9",
         "app_name": "IRIS_v2",
-        "error": "Status 401 for action 'IRIS v2 1'. Are the fields correct?",
-        "type": "authentication",
+        "error": "Status 400 for action 'IRIS v2 1'. Are the fields correct?",
+        "type": "configuration",
         "waiting": false
       }
     ],
