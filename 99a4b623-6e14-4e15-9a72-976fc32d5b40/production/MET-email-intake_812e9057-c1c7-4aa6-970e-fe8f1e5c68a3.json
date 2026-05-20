@@ -1542,7 +1542,7 @@
       "id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
       "is_valid": true,
       "sharing": true,
-      "label": "build_postprocess_list",
+      "label": "merge_lists",
       "public": true,
       "generated": false,
       "environment": "Shuffle",
@@ -1673,6 +1673,176 @@
       "position": {
         "x": 283.41278065341197,
         "y": -704.4220740497726
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Takes a list and filters based on your data",
+      "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
+      "errors": [],
+      "id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
+      "is_valid": true,
+      "sharing": true,
+      "label": "filter_iris_success",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "filter_list",
+      "parameters": [
+        {
+          "description": "The list to filter from. Don't use .# into this.",
+          "id": "",
+          "name": "input_list",
+          "example": "[{\"data\": \"1.2.3.4\"}, {\"data\": \"1.2.3.5\"}]",
+          "value": "$merge_lists",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The field to check in the input list",
+          "id": "",
+          "name": "field",
+          "example": "data",
+          "value": "body.status",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Type of check",
+          "id": "",
+          "name": "check",
+          "example": "equals",
+          "value": "equals",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "equals",
+            "equals any of",
+            "larger than",
+            "less than",
+            "is empty",
+            "contains",
+            "contains any of",
+            "in cache key",
+            "starts with",
+            "ends with",
+            "field is unique",
+            "files by extension"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The value to compare with",
+          "id": "",
+          "name": "value",
+          "example": "1.2.3.4",
+          "value": "success",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to add or to NOT add",
+          "id": "",
+          "name": "opposite",
+          "example": "false",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 596.4555704419083,
+        "y": -515.4174984394673
       },
       "authentication_id": "",
       "category": "Other",
@@ -1853,6 +2023,17 @@
       "destination_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
       "id": "5b914dbe-e352-48e4-a116-b5c8941a1a54",
       "source_id": "53b5e2ef-4bce-4f14-aa4b-9d34c569e296",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
+      "id": "fd44da56-71ae-476a-827a-5c5601e304e3",
+      "source_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
       "label": "",
       "has_errors": false,
       "conditions": null,
@@ -2186,7 +2367,7 @@
     },
     "other": {
       "name": "",
-      "count": 2,
+      "count": 3,
       "id": "",
       "description": "",
       "large_image": ""
