@@ -699,7 +699,7 @@
             },
             {
               "key": "${message}",
-              "value": "Found and processed {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder. "
+              "value": "Processed {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in {{ $workflow_customer }}'s intake folder.\n\nFailed: {{ $filter_iris_success.invalid | size }}"
             }
           ],
           "unique_toggled": false,
@@ -1898,7 +1898,7 @@
       "source_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2025,7 +2025,7 @@
       "source_id": "53b5e2ef-4bce-4f14-aa4b-9d34c569e296",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2036,7 +2036,7 @@
       "source_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2047,7 +2047,7 @@
       "source_id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2214,7 +2214,7 @@
     "skip_notifications": false
   },
   "created": 1778154442,
-  "edited": 1779292491,
+  "edited": 1779298256,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "812e9057-c1c7-4aa6-970e-fe8f1e5c68a3",
@@ -2412,13 +2412,13 @@
   "validated": false,
   "validation": {
     "valid": true,
-    "changed_at": 1779294908000,
-    "last_valid": 1779294908000,
+    "changed_at": 1779298218000,
+    "last_valid": 1779298218000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "d333e6a8-4c76-4ced-8960-3b044e49b059",
+    "execution_id": "b0650da9-d35b-4548-a659-303fd80ecfb9",
     "node_id": "",
     "total_problems": 0,
     "errors": [],
