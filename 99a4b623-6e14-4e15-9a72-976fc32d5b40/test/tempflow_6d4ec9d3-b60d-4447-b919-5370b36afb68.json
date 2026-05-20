@@ -314,7 +314,7 @@
     "skip_notifications": false
   },
   "created": 1779272553,
-  "edited": 1779276890,
+  "edited": 1779277485,
   "last_runtime": 0,
   "due_date": 0,
   "id": "6d4ec9d3-b60d-4447-b919-5370b36afb68",
@@ -457,13 +457,13 @@
   "validated": false,
   "validation": {
     "valid": false,
-    "changed_at": 1779276895000,
+    "changed_at": 1779277494000,
     "last_valid": 1779273130000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "37993b25-75af-4ba0-bbcd-1081c095f76a",
+    "execution_id": "f33a62b0-4173-4a07-b099-26f04b65948e",
     "node_id": "",
     "total_problems": 1,
     "errors": [
@@ -472,8 +472,8 @@
         "action_id": "86433831-8766-41d3-99fe-0985e08f2e46",
         "app_id": "7847fb269844353af35cdc7eaeb05ef9",
         "app_name": "IRIS_v2",
-        "error": "Status 404 for action 'IRIS v2 1'. Are the fields correct?",
-        "type": "configuration",
+        "error": "Status 401 for action 'IRIS v2 1'. Are the fields correct?",
+        "type": "authentication",
         "waiting": false
       }
     ],
