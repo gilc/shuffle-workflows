@@ -84,7 +84,7 @@
           "id": "",
           "name": "apikey",
           "example": "The API key to use. Space = skip",
-          "value": "Secret. Replaced during app execution!",
+          "value": "",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -107,7 +107,7 @@
           "id": "",
           "name": "url",
           "example": "https://\u003cmy_ip\u003e",
-          "value": "Secret. Replaced during app execution!",
+          "value": "https://\u003cmy_ip\u003e",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -150,7 +150,7 @@
             },
             {
               "key": "${alert_customer}",
-              "value": "3"
+              "value": "$iris_customer_id"
             },
             {
               "key": "${alert_source_content}",
@@ -278,7 +278,7 @@
         "x": 293.2080427511659,
         "y": 531.154383428851
       },
-      "authentication_id": "74cbd8af-927e-4dc1-85bf-c8fdcfbc8779",
+      "authentication_id": "40bd1c34-72c4-47ce-92f0-f4c46c209d0c",
       "category": "Cases",
       "reference_url": "",
       "sub_action": false,
@@ -347,7 +347,14 @@
     }
   },
   "org_id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
-  "workflow_variables": null,
+  "workflow_variables": [
+    {
+      "description": "",
+      "id": "89f19e61-131f-4cba-96f2-0d84784e5081",
+      "name": "iris_customer_id",
+      "value": "3"
+    }
+  ],
   "execution_environment": "",
   "previously_saved": true,
   "categories": {
