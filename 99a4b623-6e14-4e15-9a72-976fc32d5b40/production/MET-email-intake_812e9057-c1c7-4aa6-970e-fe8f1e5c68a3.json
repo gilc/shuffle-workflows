@@ -1736,7 +1736,7 @@
     {
       "description": "",
       "id": "fc87b43c-38ae-4875-a59e-8692f22e21e1",
-      "name": "$iris_customer_id",
+      "name": "iris_customer_id",
       "value": "3"
     }
   ],
