@@ -1859,17 +1859,6 @@
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
-    },
-    {
-      "destination_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
-      "id": "e740b95f-c28f-43a0-936b-c56a8ee0527a",
-      "source_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
-      "label": "",
-      "has_errors": false,
-      "conditions": null,
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
     }
   ],
   "visual_branches": [],
