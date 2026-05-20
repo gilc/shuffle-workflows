@@ -496,7 +496,7 @@
           "id": "",
           "name": "message_id",
           "example": "",
-          "value": "$get_customer_folder_emails.body.value.#.id",
+          "value": "$filter_iris_success.valid.#.message.email_message_id",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -620,8 +620,8 @@
         "value": ""
       },
       "position": {
-        "x": 210.9105794361492,
-        "y": -460.180445438186
+        "x": 609.6904673579049,
+        "y": -286.6655323729946
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -835,8 +835,8 @@
         "value": ""
       },
       "position": {
-        "x": -174.8139780753958,
-        "y": -12.111022296723942
+        "x": 704.937072377943,
+        "y": 226.85249832814492
       },
       "authentication_id": "f56893f1-5e81-4bf6-ab2b-33b8bda30fd5",
       "category": "Communication",
@@ -919,7 +919,7 @@
           "id": "",
           "name": "id",
           "example": "",
-          "value": "$get_customer_folder_emails.body.value.#.id",
+          "value": "$filter_iris_success.valid.#.message.email_message_id",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -1043,8 +1043,8 @@
         "value": ""
       },
       "position": {
-        "x": 67.30857896782287,
-        "y": -167.94882772687546
+        "x": 522.4047106037195,
+        "y": 0.9999034155477045
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -1249,8 +1249,8 @@
         "value": ""
       },
       "position": {
-        "x": 574.2336056061315,
-        "y": -286.8090129511048
+        "x": 947.1384626322007,
+        "y": -203.09567770035457
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -2034,6 +2034,17 @@
       "destination_id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
       "id": "fd44da56-71ae-476a-827a-5c5601e304e3",
       "source_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
+      "id": "74207f23-a672-4848-8a8e-f2bb797d01d1",
+      "source_id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
       "label": "",
       "has_errors": false,
       "conditions": null,
