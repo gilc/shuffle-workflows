@@ -620,7 +620,7 @@
         "value": ""
       },
       "position": {
-        "x": -192.21943530447274,
+        "x": -317.93372101875843,
         "y": -736.663956904085
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
@@ -835,8 +835,8 @@
         "value": ""
       },
       "position": {
-        "x": -756.4306019228346,
-        "y": -442.2592572222217
+        "x": -976.4306019228346,
+        "y": -347.9735429365074
       },
       "authentication_id": "f56893f1-5e81-4bf6-ab2b-33b8bda30fd5",
       "category": "Communication",
@@ -1043,8 +1043,8 @@
         "value": ""
       },
       "position": {
-        "x": -422.67739547011485,
-        "y": -668.9665960731878
+        "x": -634.1059668986862,
+        "y": -488.9665960731878
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -1264,6 +1264,68 @@
       "parent_controlled": false,
       "source_workflow": "",
       "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Runs python with the data input. Any prints will be returned.",
+      "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
+      "errors": [],
+      "id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
+      "is_valid": true,
+      "sharing": true,
+      "label": "parse_socaas_email",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The code to run. Can be a file ID from within Shuffle.",
+          "id": "",
+          "name": "code",
+          "example": "print(\"hello world\")",
+          "value": "import re\nimport json\nimport html\n\nsubject = \"\"\"$get_customer_folder_emails.body.value.#.subject\"\"\"\nraw_body = \"\"\"$get_customer_folder_emails.body.value.#.body.content\"\"\"\nsender = \"\"\"$get_customer_folder_emails.body.value.#.from.emailAddress.address\"\"\"\nreceived_time = \"\"\"$get_customer_folder_emails.body.value.#.receivedDateTime\"\"\"\nmessage_id = \"\"\"$get_customer_folder_emails.body.value.#.id\"\"\"\ninternet_message_id = \"\"\"$get_customer_folder_emails.body.value.#.internetMessageId\"\"\"\nweb_link = \"\"\"$get_customer_folder_emails.body.value.#.webLink\"\"\"\n\n# Basic HTML → text conversion\ntext = raw_body\ntext = re.sub(r\"(?i)\u003cbr\\s*/?\u003e\", \"\\n\", text)\ntext = re.sub(r\"(?i)\u003c/(p|div|tr|td|li|h1|h2|h3|table)\u003e\", \"\\n\", text)\ntext = re.sub(r\"\u003c[^\u003e]+\u003e\", \" \", text)\ntext = html.unescape(text)\ntext = text.replace(\"\\xa0\", \" \")\n\n# Normalize lines\nlines = [line.strip() for line in text.splitlines() if line.strip()]\nnormalized_text = \"\\n\".join(lines)\n\ndef value_after_label(label_regex):\n    for i, line in enumerate(lines):\n        if re.fullmatch(label_regex, line, re.IGNORECASE):\n            if i + 1 \u003c len(lines):\n                return lines[i + 1].strip()\n\n    m = re.search(label_regex + r\"\\s*[:\\-]\\s*(.+)\", normalized_text, re.IGNORECASE)\n    if m:\n        return m.group(1).strip()\n\n    return None\n\ndef extract_socaas_link(raw_html):\n    m = re.search(r'href=\"([^\"]*socaas\\.mss\\.fortinet\\.com[^\"]+)\"', raw_html, re.IGNORECASE)\n    if m:\n        return html.unescape(m.group(1))\n    return None\n\nseverity_map = {\n    \"critical\": 6,\n    \"high\": 5,\n    \"medium\": 1,\n    \"low\": 4\n}\n\ncustomer_map = {\n    \"metalogalva\": 3\n}\n\ncustomer_match = $workflow_customer\n\nalert_id = value_after_label(r\"Alert\\s+ID\")\nseverity_text = value_after_label(r\"Alert\\s+Severity\")\nalert_type = value_after_label(r\"Alert\\s+Type\")\ndetection_time = value_after_label(r\"Detection\\s+Time\")\naffected_asset = value_after_label(r\"Affected\\s+Asset\")\n\nseverity_key = severity_text.lower().strip() if severity_text else \"medium\"\n\niris_severity_id = severity_map.get(severity_key, 1)\n\nsocaas_link = extract_socaas_link(raw_body)\n\nif alert_id:\n    alert_source_ref = f\"fortisocaas:{customer}:{alert_id}\"\nelse:\n    alert_source_ref = f\"email:{internet_message_id or message_id}\"\n\nif alert_type and affected_asset:\n    alert_title = f\"[SOCaaS][{customer}] {alert_type} - {affected_asset}\"\nelif alert_type:\n    alert_title = f\"[SOCaaS][{customer}] {alert_type}\"\nelse:\n    alert_title = f\"[SOCaaS][{customer}] {subject}\"\n\noutput = {\n    \"customer\": customer,\n    \"alert_customer_id\": $iris_customer_id,\n    \"email_subject\": subject,\n    \"email_sender\": sender,\n    \"email_received_time\": received_time,\n    \"email_message_id\": message_id,\n    \"internet_message_id\": internet_message_id,\n    \"email_web_link\": web_link,\n\n    \"socaas_alert_id\": alert_id,\n    \"socaas_link\": socaas_link,\n    \"severity_text\": severity_key,\n    \"alert_severity_id\": alert_severity_id,\n    \"alert_type\": alert_type,\n    \"detection_time\": detection_time,\n    \"affected_asset\": affected_asset,\n\n    \"alert_title\": alert_title,\n    \"alert_source\": \"FortiGuard SOCaaS via Email Intake\",\n    \"alert_source_ref\": alert_source_ref,\n    \"alert_status_id\": 1,\n    \"alert_tags\": f\"socaas,email-intake,{customer.lower()}\",\n    \"raw_body_text\": normalized_text\n}\n\nprint(json.dumps(output))",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 86.95758147035274,
+        "y": -915.7952148063921
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
     }
   ],
   "branches": [
@@ -1412,6 +1474,17 @@
           }
         }
       ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
+      "id": "953be34b-0392-450c-a3d0-5d3f4ee0fe0f",
+      "source_id": "ebd21d58-b29f-4004-b63f-15c07ab6cedf",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -1659,6 +1732,12 @@
       "id": "206f9da1-9c0a-46ba-98a9-32cc5dce2d09",
       "name": "workflow_channel",
       "value": "email"
+    },
+    {
+      "description": "",
+      "id": "fc87b43c-38ae-4875-a59e-8692f22e21e1",
+      "name": "$iris_customer_id",
+      "value": "3"
     }
   ],
   "execution_environment": "",
@@ -1736,7 +1815,7 @@
     },
     "other": {
       "name": "",
-      "count": 0,
+      "count": 1,
       "id": "",
       "description": "",
       "large_image": ""
