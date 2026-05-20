@@ -1125,7 +1125,7 @@
           "id": "",
           "name": "id",
           "example": "",
-          "value": "$get_customer_folder_emails.body.value.#.id",
+          "value": "$filter_iris_success.valid.#.message.email_message_id",
           "multiline": false,
           "multiselect": false,
           "options": null,
