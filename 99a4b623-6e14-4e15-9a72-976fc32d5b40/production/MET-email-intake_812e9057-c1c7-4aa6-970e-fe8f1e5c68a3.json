@@ -695,11 +695,11 @@
           "value_replace": [
             {
               "key": "${chat_id}",
-              "value": "-4778043185"
+              "value": "-5043414619"
             },
             {
               "key": "${message}",
-              "value": "Processed {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in {{ $workflow_customer }}'s intake folder.\n\nFailed: {{ $filter_iris_success.invalid | size }}"
+              "value": "Processed {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\nFailed: {{ $filter_iris_success.invalid | size }}"
             }
           ],
           "unique_toggled": false,
