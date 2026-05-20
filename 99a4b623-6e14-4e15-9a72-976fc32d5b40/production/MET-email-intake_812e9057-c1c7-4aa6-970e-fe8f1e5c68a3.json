@@ -1311,8 +1311,8 @@
         "value": ""
       },
       "position": {
-        "x": 210.09987117133463,
-        "y": -1004.3469736924915
+        "x": 244.28173343193743,
+        "y": -1111.9565400684633
       },
       "authentication_id": "",
       "category": "Other",
@@ -1517,11 +1517,165 @@
         "value": ""
       },
       "position": {
-        "x": 249.13828301413375,
-        "y": -782.4068562359422
+        "x": 557.659424909858,
+        "y": -929.043379666861
       },
       "authentication_id": "40bd1c34-72c4-47ce-92f0-f4c46c209d0c",
       "category": "Cases",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Merges two lists of same type AND length.",
+      "app_id": "4b91ef95-a68a-4a12-a060-932c59431466",
+      "errors": [],
+      "id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
+      "is_valid": true,
+      "sharing": true,
+      "label": "build_postprocess_list",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "merge_lists",
+      "parameters": [
+        {
+          "description": "The first list",
+          "id": "",
+          "name": "list_one",
+          "example": "{'key': 'value'}",
+          "value": "$create_iris_alert",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The second list to use",
+          "id": "",
+          "name": "list_two",
+          "example": "{'key2': 'value2'}",
+          "value": "$parse_socaas_email",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "If items in list 2 are strings, but first is JSON, sets the values to the specified key. Defaults to key \"new_shuffle_key\"",
+          "id": "",
+          "name": "set_field",
+          "example": "json_key",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Sort by this key before using list one for merging",
+          "id": "",
+          "name": "sort_key_list_one",
+          "example": "json_key",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Sort by this key before using list two for merging",
+          "id": "",
+          "name": "sort_key_list_two",
+          "example": "json_key",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 283.41278065341197,
+        "y": -704.4220740497726
+      },
+      "authentication_id": "",
+      "category": "Other",
       "reference_url": "",
       "sub_action": false,
       "run_magic_output": false,
@@ -1690,15 +1844,26 @@
       "source_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
       "label": "",
       "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
+      "id": "5b914dbe-e352-48e4-a116-b5c8941a1a54",
+      "source_id": "53b5e2ef-4bce-4f14-aa4b-9d34c569e296",
+      "label": "",
+      "has_errors": false,
       "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
     },
     {
-      "destination_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
-      "id": "88d1642e-cc1b-4e19-9bef-27783ca31b12",
-      "source_id": "53b5e2ef-4bce-4f14-aa4b-9d34c569e296",
+      "destination_id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
+      "id": "e740b95f-c28f-43a0-936b-c56a8ee0527a",
+      "source_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
       "label": "",
       "has_errors": false,
       "conditions": null,
@@ -1868,7 +2033,7 @@
     "skip_notifications": false
   },
   "created": 1778154442,
-  "edited": 1778156510,
+  "edited": 1779292491,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "812e9057-c1c7-4aa6-970e-fe8f1e5c68a3",
@@ -2032,7 +2197,7 @@
     },
     "other": {
       "name": "",
-      "count": 1,
+      "count": 2,
       "id": "",
       "description": "",
       "large_image": ""
@@ -2066,13 +2231,13 @@
   "validated": false,
   "validation": {
     "valid": true,
-    "changed_at": 1779287708000,
-    "last_valid": 1779287708000,
+    "changed_at": 1779294908000,
+    "last_valid": 1779294908000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "ad206c15-ea12-48e9-a376-d10cd609cc5a",
+    "execution_id": "d333e6a8-4c76-4ced-8960-3b044e49b059",
     "node_id": "",
     "total_problems": 0,
     "errors": [],
