@@ -11,7 +11,7 @@
       "is_valid": true,
       "isStartNode": true,
       "sharing": true,
-      "label": "Change Me",
+      "label": "Change_Me",
       "public": true,
       "generated": false,
       "environment": "Shuffle",
@@ -22,7 +22,7 @@
           "id": "",
           "name": "call",
           "example": "Repeating: Hello World",
-          "value": "Hello world",
+          "value": "27",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -48,8 +48,8 @@
         "value": ""
       },
       "position": {
-        "x": 304.1178010471204,
-        "y": 311.60785340314135
+        "x": 133.68955596677895,
+        "y": 185.47169461486607
       },
       "authentication_id": "",
       "category": "",
@@ -84,7 +84,7 @@
           "id": "",
           "name": "apikey",
           "example": "The API key to use. Space = skip",
-          "value": "0bvaTTw2FlgPdg-QYauzd5M9DKz1US7E47rnHZJXy5B_AFQCtDOX2MJxZegL342T-7kwhq5gmyOn1AQRTa_nGA",
+          "value": "Secret. Replaced during app execution!",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -107,7 +107,7 @@
           "id": "",
           "name": "url",
           "example": "https://\u003cmy_ip\u003e",
-          "value": "https://iris.noshut.pt/",
+          "value": "Secret. Replaced during app execution!",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -130,7 +130,7 @@
           "id": "",
           "name": "alert_id",
           "example": "",
-          "value": "1",
+          "value": "$change_me",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -254,8 +254,8 @@
         "value": ""
       },
       "position": {
-        "x": 508.5340314136125,
-        "y": 446.37225130890056
+        "x": 499.38939704504867,
+        "y": 616.2011752965142
       },
       "authentication_id": "74cbd8af-927e-4dc1-85bf-c8fdcfbc8779",
       "category": "Cases",
