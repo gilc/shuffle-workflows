@@ -1409,8 +1409,8 @@
         "value": ""
       },
       "position": {
-        "x": -98.63841468605156,
-        "y": -396.591734610054
+        "x": -152.92412897176584,
+        "y": -328.0203060386254
       },
       "authentication_id": "5b9358429c6d0df134b8cd6d0d716db8",
       "category": "Communication",
@@ -1572,6 +1572,17 @@
       "label": "",
       "has_errors": false,
       "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "d1dfdbf9-fae0-4ce6-a7a9-63ce9f3253ae",
+      "id": "5d7bc61f-629f-471f-8e94-5852c39c0d9f",
+      "source_id": "9278ffa0-48d3-4c89-91b7-919a82692d97",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
