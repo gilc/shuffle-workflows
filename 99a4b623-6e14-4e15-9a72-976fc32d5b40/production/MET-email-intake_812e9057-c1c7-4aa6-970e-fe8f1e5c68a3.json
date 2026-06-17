@@ -1900,7 +1900,7 @@
           "id": "",
           "name": "body",
           "example": "{\n  \"body\": {\n     \"content\": \"Hello world\"\n  }\n}",
-          "value": "{\n  \"body\": {\n     \"content\": \"Hello world\"\n  }\n}",
+          "value": "{\n  \"body\": {\n     \"content\": \"Processed {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\"\n  }\n}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -2254,6 +2254,17 @@
       "label": "",
       "has_errors": false,
       "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "62e554f9-52ac-4c37-8fd2-08b4592d8e9f",
+      "id": "9670571a-da38-4ba2-af68-bc6b60a5c81c",
+      "source_id": "9278ffa0-48d3-4c89-91b7-919a82692d97",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
