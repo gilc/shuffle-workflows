@@ -1271,7 +1271,7 @@
       "description": "\n\nhttps://graph.microsoft.com/v1.0/teams/ce7a578a-7986-41c8-b00c-37565f45a1f7/channels",
       "app_id": "3e3d80ad4bf479f0ddbe5315178ee66b",
       "errors": [],
-      "id": "d054e970-c407-4a33-b7ec-d3a5414580f6",
+      "id": "d1dfdbf9-fae0-4ce6-a7a9-63ce9f3253ae",
       "is_valid": true,
       "private_id": "3e3d80ad4bf479f0ddbe5315178ee66b",
       "label": "NOSHUT_Microsoft_Teams_1",
@@ -1409,8 +1409,8 @@
         "value": ""
       },
       "position": {
-        "x": -35.32669367163635,
-        "y": -259.07870538556153
+        "x": -98.63841468605156,
+        "y": -396.591734610054
       },
       "authentication_id": "5b9358429c6d0df134b8cd6d0d716db8",
       "category": "Communication",
@@ -1427,6 +1427,17 @@
     }
   ],
   "branches": [
+    {
+      "destination_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
+      "id": "8b5d2673-00ce-485c-88d2-c745e8d33c2a",
+      "source_id": "3e495e2e-5540-4a65-aaf7-667424faf284",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
     {
       "destination_id": "e536a6b8-5d28-4460-a587-c2929c25e3b1",
       "id": "624648f9-2265-4862-b1d4-d897a6dbd7a5",
@@ -1558,17 +1569,6 @@
       "destination_id": "9565e157-01c5-4415-95a3-498952af453a",
       "id": "c963bec3-3b60-48be-8ffc-0460bf9d8557",
       "source_id": "3355f6cd-0ff0-498e-9c04-6a79fbfe8b74",
-      "label": "",
-      "has_errors": false,
-      "conditions": [],
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
-    },
-    {
-      "destination_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
-      "id": "8b5d2673-00ce-485c-88d2-c745e8d33c2a",
-      "source_id": "3e495e2e-5540-4a65-aaf7-667424faf284",
       "label": "",
       "has_errors": false,
       "conditions": [],
@@ -1738,7 +1738,7 @@
     "skip_notifications": false
   },
   "created": 1773680470,
-  "edited": 1781626454,
+  "edited": 1781626669,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "dd5fef6a-75c2-4e20-be15-aa3b4b05a016",
@@ -1906,13 +1906,13 @@
   "validated": false,
   "validation": {
     "valid": true,
-    "changed_at": 1781626572000,
-    "last_valid": 1781626572000,
+    "changed_at": 1781699181000,
+    "last_valid": 1781699181000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "8d19a90b-d08a-4e86-80f8-c2f639fcd481",
+    "execution_id": "34c27a92-1898-47a6-8f41-50b88858e4f6",
     "node_id": "",
     "total_problems": 0,
     "errors": [],
