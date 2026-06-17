@@ -1043,8 +1043,8 @@
         "value": ""
       },
       "position": {
-        "x": -422.67739547011485,
-        "y": -668.9665960731878
+        "x": -391.24882404154334,
+        "y": -620.3951675017593
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -1264,6 +1264,166 @@
       "parent_controlled": false,
       "source_workflow": "",
       "source_execution": ""
+    },
+    {
+      "app_name": "NOSHUT_Microsoft_Teams",
+      "app_version": "1.1.0",
+      "description": "\n\nhttps://graph.microsoft.com/v1.0/teams/ce7a578a-7986-41c8-b00c-37565f45a1f7/channels",
+      "app_id": "3e3d80ad4bf479f0ddbe5315178ee66b",
+      "errors": [],
+      "id": "db201fed-e899-4f19-b8f5-89e3d1265f6c",
+      "is_valid": true,
+      "private_id": "3e3d80ad4bf479f0ddbe5315178ee66b",
+      "label": "NOSHUT_Microsoft_Teams_1",
+      "public": false,
+      "generated": true,
+      "environment": "Shuffle",
+      "name": "get_teste",
+      "parameters": [
+        {
+          "description": "The URL of the API",
+          "id": "",
+          "name": "url",
+          "example": "https://graph.microsoft.com",
+          "value": "Secret. Replaced during app execution!",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": true,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add or edit headers",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type=application/json\nAccept=application/json\r\n",
+          "value": "Accept=application/json\nContent-Type=application/json",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add or edit queries",
+          "id": "",
+          "name": "queries",
+          "example": "view=basic\u0026redirect=test",
+          "value": "",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Check if you want to verify request",
+          "id": "",
+          "name": "ssl_verify",
+          "example": "True",
+          "value": "False",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "False",
+            "True"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Choose if we should write the result straight to a file or not",
+          "id": "",
+          "name": "to_file",
+          "example": "False",
+          "value": "False",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "False",
+            "True"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -143.15141805040184,
+        "y": -348.20539207944296
+      },
+      "authentication_id": "5b9358429c6d0df134b8cd6d0d716db8",
+      "category": "Communication",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
     }
   ],
   "branches": [
@@ -1412,6 +1572,17 @@
       "label": "",
       "has_errors": false,
       "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "db201fed-e899-4f19-b8f5-89e3d1265f6c",
+      "id": "ad544414-2575-41f4-bb93-09c6f4b82b5e",
+      "source_id": "9278ffa0-48d3-4c89-91b7-919a82692d97",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -1649,7 +1820,7 @@
     },
     "communication": {
       "name": "",
-      "count": 6,
+      "count": 7,
       "id": "",
       "description": "",
       "large_image": ""
