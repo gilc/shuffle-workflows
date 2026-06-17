@@ -1285,7 +1285,7 @@
           "id": "",
           "name": "url",
           "example": "https://graph.microsoft.com",
-          "value": "Secret. Replaced during app execution!",
+          "value": "",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -1761,7 +1761,7 @@
     "skip_notifications": false
   },
   "created": 1773680470,
-  "edited": 1781700220,
+  "edited": 1781707032,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "dd5fef6a-75c2-4e20-be15-aa3b4b05a016",
@@ -1928,17 +1928,27 @@
   "updated_by": "gilc@noshut.pt",
   "validated": false,
   "validation": {
-    "valid": true,
-    "changed_at": 1781706848000,
-    "last_valid": 1781706848000,
+    "valid": false,
+    "changed_at": 1781707238000,
+    "last_valid": 1781707207000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "ac12885e-17c9-4fee-8504-e1f98b2d56e1",
+    "execution_id": "ebb0ab26-3277-4131-9646-aa0a817096ff",
     "node_id": "",
-    "total_problems": 0,
-    "errors": [],
+    "total_problems": 1,
+    "errors": [
+      {
+        "order": 0,
+        "action_id": "ff3cf325-7803-4d25-90ff-9c2ac5053b1b",
+        "app_id": "3e3d80ad4bf479f0ddbe5315178ee66b",
+        "app_name": "NOSHUT2_Microsoft_Teams",
+        "error": "Action 'NOSHUT2 Microsoft Teams 1' failed: 'An exception occurred while running this function (2). See exception for more details and contact support if this persists (support@shuffler.io)'",
+        "type": "configuration",
+        "waiting": false
+      }
+    ],
     "subflow_apps": []
   },
   "parentorg_workflow": "",
