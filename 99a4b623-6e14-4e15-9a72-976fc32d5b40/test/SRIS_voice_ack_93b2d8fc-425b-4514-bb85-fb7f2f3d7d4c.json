@@ -6399,7 +6399,7 @@
       "description": "base64 of 'clicksend_username:apikey'. Generate with: echo -n 'user@example.com:APIKEY' | base64   -- never paste the raw API key into a node.",
       "id": "2e86eb2f-e7cb-4869-b0b1-12bd132d95f7",
       "name": "clicksend_basic_auth",
-      "value": "REPLACE_ME"
+      "value": "aW5mb0Bub3NodXQucHQ6QzE2OEU2OUYtRDNEMy0wODgzLTc3REYtODA1RUFCODExNkE4"
     },
     {
       "description": "Fallback on-call list, JSON array of E.164 numbers in escalation order. [0] gets 5 calls, [1] gets 3. Used only when the caller does not pass 'numbers'.",
