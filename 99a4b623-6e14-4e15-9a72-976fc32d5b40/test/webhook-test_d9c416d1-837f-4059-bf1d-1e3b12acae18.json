@@ -239,7 +239,7 @@
       "app_name": "Webhook",
       "description": "Custom HTTP input trigger",
       "long_description": "Execute a workflow with an unauthicated POST request",
-      "status": "stopped",
+      "status": "running",
       "app_version": "1.0.0",
       "errors": [],
       "id": "39ecb5f7-d606-41cf-a8d8-01891a3935c0",
@@ -258,7 +258,7 @@
           "id": "",
           "name": "url",
           "example": "",
-          "value": "https://100.65.10.1:3443/api/v1/hooks/webhook_39ecb5f7-d606-41cf-a8d8-01891a3935c0",
+          "value": "https://shpath9696.noshut.pt/api/v1/hooks/webhook_39ecb5f7-d606-41cf-a8d8-01891a3935c0",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -370,8 +370,8 @@
         }
       ],
       "position": {
-        "x": -179.3899068331184,
-        "y": -327.7112762990276
+        "x": -373.67562111883274,
+        "y": -767.7112762990276
       },
       "priority": 0,
       "source_workflow": "",
@@ -613,8 +613,8 @@
         }
       ],
       "position": {
-        "x": -286.0020932538424,
-        "y": -140.31973963303417
+        "x": -597.4306646824139,
+        "y": -426.0340253473199
       },
       "priority": 0,
       "source_workflow": "",
@@ -706,12 +706,9 @@
     "skip_notifications": false
   },
   "created": 1770054281,
-  "edited": 1770125896,
+  "edited": 1774545541,
   "last_runtime": 0,
   "due_date": 0,
-  "errors": [
-    "Trigger Webhook needs to be started"
-  ],
   "id": "d9c416d1-837f-4059-bf1d-1e3b12acae18",
   "is_valid": true,
   "name": "webhook-test",
