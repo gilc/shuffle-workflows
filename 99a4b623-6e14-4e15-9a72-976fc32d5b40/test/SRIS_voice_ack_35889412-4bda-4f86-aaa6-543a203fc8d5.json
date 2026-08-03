@@ -1,0 +1,2831 @@
+{
+  "workflow_as_code": false,
+  "actions": [
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Full operating documentation for this subflow. Safe to run; does nothing.",
+      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
+      "errors": [
+        "Couldn't find app Shuffle Tools:1.2.0"
+      ],
+      "id": "97b85c16-391a-5d66-8ce4-3323b0750a98",
+      "is_valid": false,
+      "isStartNode": true,
+      "sharing": true,
+      "label": "README_read_me_first",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "repeat_back_to_me",
+      "parameters": [
+        {
+          "description": "The message to repeat",
+          "id": "",
+          "name": "call",
+          "example": "Hello world",
+          "value": "=== SRIS_voice_ack : REUSABLE PHONE-CALL ESCALATION SUBFLOW ===\n\nWHAT IT DOES\n  Calls a human by phone until one of them presses a key, then returns\n  proof of who acknowledged. Designed to be called as a SUBFLOW from any\n  workflow that needs an out-of-band, acknowledged page.\n\nHOW TO CALL IT\n  Add a \"Shuffle Workflow\" / Subflow node in the calling workflow, point\n  it at this workflow, tick \"Wait for results\", and pass a JSON execution\n  argument:\n\n    {\"incident_ref\": \"SBG-20260803-0412\",\n     \"message\": \"Impossible travel detectado para Super Bock Group\",\n     \"numbers\": [\"+351911111111\", \"+351922222222\"]}\n\n  Inside this workflow that argument arrives as $exec.\n\nWHAT IT RETURNS\n  $verdict.message -\u003e\n    {\"acknowledged\": true/false, \"acked_by\": \"+351...\", \"digit\": \"1\",\n     \"attempt\": 2, \"elapsed_seconds\": 137, \"attempts\": [...]}\n\n  Callers branch on:  $\u003csubflow_node\u003e.message.acknowledged  equals  true\n\nTHE LADDER\n  Three stages. Each stage = place a call, wait, then read call history\n  and look for a keypress. Ladder stops the moment anyone acknowledges.\n  Stage 1 -\u003e numbers[0]   Stage 2 -\u003e numbers[0]   Stage 3 -\u003e numbers[1]\n  Worst case ~5 minutes and 3 calls before it gives up.\n\nCRITICAL DESIGN NOTE - WHY THE POLL LOOKS 'WRONG'\n  Each Poll node queries the WHOLE incident window, not just its own\n  call. So an acknowledgment that ClickSend was slow to record during\n  stage 1 is still caught by the stage 2 poll, before stage 3 dials.\n  Late acks are absorbed rather than lost. Do not 'optimise' the poll to\n  filter by a single message_id - that breaks this property.\n\nCRITICAL DESIGN NOTE - WHAT COUNTS AS AN ACK\n  ClickSend returns digits as JSON null when nobody pressed a key -\n  NOT the blank string the docs claim. Verified 2026-08-03: a Busy call\n  and an unanswered call both returned null; the acknowledged call\n  returned \"1\".\n  A naive `str(digits) != \"\"` check evaluates str(None) == \"None\", which\n  is non-empty, so EVERY FAILED CALL WOULD REGISTER AS ACKNOWLEDGED -\n  the ladder stops and nobody gets woken. The is_ack() function in the\n  Eval nodes is the ONLY place an ack is decided. Do not inline it.\n\n  Also: status is NOT an ack. The acknowledged test call reported\n  status \"Sent\", not \"Delivered\". Only `digits` counts.\n\nSETUP REQUIRED\n  Workflow variable clicksend_basic_auth must hold the base64 of\n  \"username:apikey\". Generate with:\n      echo -n 'user@example.com:APIKEY' | base64\n  Never paste the raw key into a node.\n\nCOST\n  ~EUR 0.05 per call, so ~EUR 0.15 for a full unacknowledged ladder.\n\nKNOWN OPEN ITEM\n  ClickSend caller ID is not stable (+12012791392 and +12012665159 both\n  observed). Calls to PT mobiles from US numbers are easily mistaken for\n  spam. Consider a dedicated +351 number.\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": -559.999
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Validates caller input and pre-builds all three call payloads.",
+      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
+      "errors": [
+        "Couldn't find app Shuffle Tools:1.2.0"
+      ],
+      "id": "8fab8849-b867-5811-a608-781d5962b301",
+      "is_valid": false,
+      "sharing": true,
+      "label": "Parse_Input",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The Python code to run",
+          "id": "",
+          "name": "code",
+          "example": "print('hello')",
+          "value": "# ---------------------------------------------------------------\n# PARSE_INPUT - validate the caller's argument and build the ladder.\n#\n# Fails LOUDLY on bad input. A malformed phone number at 04:00 is a\n# silent non-page, which is worse than a crashed workflow: the crash\n# gets noticed, the silence does not.\n# ---------------------------------------------------------------\nimport json, time, re\n\nraw = r\"\"\"$exec\"\"\"\n\ntry:\n    args = json.loads(raw) if isinstance(raw, str) and raw.strip() else {}\nexcept Exception:\n    args = {}\n\nif not isinstance(args, dict):\n    args = {}\n\nincident_ref = str(args.get(\"incident_ref\") or (\"SRIS-%d\" % int(time.time())))\n# Keep the ref clean: it becomes part of custom_string and is read aloud.\nincident_ref = re.sub(r\"[^A-Za-z0-9\\-]\", \"\", incident_ref)[:24]\n\nmessage = str(args.get(\"message\") or \"Alerta critico S R I S.\")\n\nnumbers = args.get(\"numbers\")\nif isinstance(numbers, str):\n    try:\n        numbers = json.loads(numbers)\n    except Exception:\n        numbers = [numbers]\nif not numbers:\n    # Fall back to the workflow-level on-call list.\n    try:\n        numbers = json.loads(r\"\"\"$oncall_numbers\"\"\")\n    except Exception:\n        numbers = []\n\nnumbers = [str(n).strip() for n in numbers if str(n).strip()]\nbad = [n for n in numbers if not re.match(r\"^\\+[1-9]\\d{6,14}$\", n)]\n\nif not numbers or bad:\n    out = {\"fatal\": True,\n           \"error\": \"No valid E.164 numbers. bad=%s all=%s\" % (bad, numbers),\n           \"incident_ref\": incident_ref}\n    print(json.dumps(out))\nelse:\n    now = int(time.time())\n    primary = numbers[0]\n    secondary = numbers[1] if len(numbers) \u003e 1 else numbers[0]\n    ladder = [primary, primary, secondary]\n\n    def body_for(attempt, to):\n        # custom_string is unique PER ATTEMPT but prefixed with the\n        # incident ref, so the poll can match the whole incident with a\n        # startswith() while the audit trail stays attempt-accurate.\n        cs = \"%s:%d:%s\" % (incident_ref, attempt, to.lstrip(\"+\"))\n        spoken = \"%s Referencia, %s. Prima 1 para confirmar.\" % (\n            message, \", \".join(list(incident_ref[-4:])))\n        return {\"messages\": [{\n            \"to\": to,\n            \"body\": spoken[:290],          # 300 chars = 1 credit\n            \"lang\": \"pt-pt\",\n            \"voice\": \"male\",               # pt-pt has NO female voice\n            \"country\": \"PT\",\n            \"custom_string\": cs,\n            \"require_input\": 1,\n            \"machine_detection\": 1,\n            \"source\": \"shuffle-sris\",\n        }]}\n\n    out = {\n        \"fatal\": False,\n        \"incident_ref\": incident_ref,\n        \"started_at\": now,\n        \"date_from\": now - 120,\n        \"date_to\": now + 1800,\n        \"ladder\": ladder,\n        \"call_1_body\": body_for(1, ladder[0]),\n        \"call_2_body\": body_for(2, ladder[1]),\n        \"call_3_body\": body_for(3, ladder[2]),\n    }\n    print(json.dumps(out))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": -339.999
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Stage 1: place the voice call to the primary number.",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "78545fa3-3e56-533a-ad26-5ba168860913",
+      "is_valid": true,
+      "sharing": true,
+      "label": "Call_1",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "POST",
+      "parameters": [
+        {
+          "description": "The URL to post to",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://rest.clicksend.com/v3/voice/send",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The body to use",
+          "id": "",
+          "name": "body",
+          "example": "{\n\t'json': 'blob'\n}",
+          "value": "{{ $parse_input.message.call_1_body }}",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthorization: Basic $clicksend_basic_auth",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to check the certificate or not",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "30",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": -99.999
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Stage 1: read call history after a delay. Queries the WHOLE incident window, so it also catches acks from earlier stages.",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "dd5e8076-0361-50d3-ac21-fe7ebe749538",
+      "is_valid": true,
+      "sharing": true,
+      "label": "Poll_1",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "GET",
+      "parameters": [
+        {
+          "description": "The URL to get",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://rest.clicksend.com/v3/voice/history?date_from=$parse_input.message.date_from\u0026date_to=$parse_input.message.date_to\u0026limit=50",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthorization: Basic $clicksend_basic_auth",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to check the certificate or not",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "30",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Write result to a file",
+          "id": "",
+          "name": "to_file",
+          "example": "false",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 30.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 70,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Stage 1: decide whether anyone acknowledged. Stops the ladder if so.",
+      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
+      "errors": [
+        "Couldn't find app Shuffle Tools:1.2.0"
+      ],
+      "id": "f25caf22-5b4d-51c7-b6de-28d296bb3b05",
+      "is_valid": false,
+      "sharing": true,
+      "label": "Eval_1",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The Python code to run",
+          "id": "",
+          "name": "code",
+          "example": "print('hello')",
+          "value": "# ---------------------------------------------------------------\n# EVAL_1 - did anyone acknowledge yet?\n#\n# Reads the ClickSend call history returned by Poll_1 and decides.\n# Sets acknowledged=true to STOP the ladder.\n# ---------------------------------------------------------------\nimport json\n\nREF = \"$parse_input.message.incident_ref\"\nACK_DIGIT = \"$ack_digit\".strip()\n\nraw = r\"\"\"$poll_1\"\"\"\ntry:\n    resp = json.loads(raw) if isinstance(raw, str) else raw\nexcept Exception:\n    resp = {}\n\nrows = (((resp or {}).get(\"body\") or {}).get(\"data\") or {})\nrows = rows.get(\"data\") if isinstance(rows, dict) else rows\nif not isinstance(rows, list):\n    rows = []\n\n\ndef is_ack(rec):\n    \"\"\"THE ONLY PLACE AN ACK IS DECIDED. See the README node.\n\n    ClickSend sends digits as JSON null when no key was pressed, so the\n    None check MUST come before any string coercion. str(None) is\n    \"None\" - truthy and non-empty - which would pass Busy and\n    unanswered calls as acknowledgments and silently stop the ladder.\n    \"\"\"\n    cs = rec.get(\"custom_string\") or \"\"\n    if not cs.startswith(REF):\n        return False\n    d = rec.get(\"digits\")\n    if d is None:               # null == nobody pressed anything\n        return False\n    d = str(d).strip()\n    if not d:                   # blank string, if they ever ship one\n        return False\n    if ACK_DIGIT and d != ACK_DIGIT:\n        return False\n    return True\n\n\nhits = [r for r in rows if is_ack(r)]\nseen = [{\"custom_string\": r.get(\"custom_string\"),\n         \"to\": r.get(\"to\"),\n         \"status\": r.get(\"status_text\"),\n         \"digits\": r.get(\"digits\"),\n         \"machine_detected\": r.get(\"machine_detected\")}\n        for r in rows if (r.get(\"custom_string\") or \"\").startswith(REF)]\n\nif hits:\n    h = hits[0]\n    out = {\"acknowledged\": True, \"stage\": 1,\n           \"acked_by\": h.get(\"to\"), \"digit\": str(h.get(\"digits\")).strip(),\n           \"message_id\": h.get(\"message_id\"),\n           \"acked_at\": h.get(\"date_added\"), \"seen\": seen}\nelse:\n    out = {\"acknowledged\": False, \"stage\": 1,\n           \"acked_by\": None, \"digit\": None, \"seen\": seen}\n\nprint(json.dumps(out))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 160.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Stage 2: place the voice call to the primary number.",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "98110eb1-1413-580a-b9e5-186e6e3e718e",
+      "is_valid": true,
+      "sharing": true,
+      "label": "Call_2",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "POST",
+      "parameters": [
+        {
+          "description": "The URL to post to",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://rest.clicksend.com/v3/voice/send",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The body to use",
+          "id": "",
+          "name": "body",
+          "example": "{\n\t'json': 'blob'\n}",
+          "value": "{{ $parse_input.message.call_2_body }}",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthorization: Basic $clicksend_basic_auth",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to check the certificate or not",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "30",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 340.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Stage 2: read call history after a delay. Queries the WHOLE incident window, so it also catches acks from earlier stages.",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "c6ca30f0-b8cd-58a6-b3db-6212b3f9bf11",
+      "is_valid": true,
+      "sharing": true,
+      "label": "Poll_2",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "GET",
+      "parameters": [
+        {
+          "description": "The URL to get",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://rest.clicksend.com/v3/voice/history?date_from=$parse_input.message.date_from\u0026date_to=$parse_input.message.date_to\u0026limit=50",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthorization: Basic $clicksend_basic_auth",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to check the certificate or not",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "30",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Write result to a file",
+          "id": "",
+          "name": "to_file",
+          "example": "false",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 470.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 70,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Stage 2: decide whether anyone acknowledged. Stops the ladder if so.",
+      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
+      "errors": [
+        "Couldn't find app Shuffle Tools:1.2.0"
+      ],
+      "id": "a89655bb-110f-58b4-8fae-29c6301d4126",
+      "is_valid": false,
+      "sharing": true,
+      "label": "Eval_2",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The Python code to run",
+          "id": "",
+          "name": "code",
+          "example": "print('hello')",
+          "value": "# ---------------------------------------------------------------\n# EVAL_2 - did anyone acknowledge yet?\n#\n# Reads the ClickSend call history returned by Poll_2 and decides.\n# Sets acknowledged=true to STOP the ladder.\n# ---------------------------------------------------------------\nimport json\n\nREF = \"$parse_input.message.incident_ref\"\nACK_DIGIT = \"$ack_digit\".strip()\n\nraw = r\"\"\"$poll_2\"\"\"\ntry:\n    resp = json.loads(raw) if isinstance(raw, str) else raw\nexcept Exception:\n    resp = {}\n\nrows = (((resp or {}).get(\"body\") or {}).get(\"data\") or {})\nrows = rows.get(\"data\") if isinstance(rows, dict) else rows\nif not isinstance(rows, list):\n    rows = []\n\n\ndef is_ack(rec):\n    \"\"\"THE ONLY PLACE AN ACK IS DECIDED. See the README node.\n\n    ClickSend sends digits as JSON null when no key was pressed, so the\n    None check MUST come before any string coercion. str(None) is\n    \"None\" - truthy and non-empty - which would pass Busy and\n    unanswered calls as acknowledgments and silently stop the ladder.\n    \"\"\"\n    cs = rec.get(\"custom_string\") or \"\"\n    if not cs.startswith(REF):\n        return False\n    d = rec.get(\"digits\")\n    if d is None:               # null == nobody pressed anything\n        return False\n    d = str(d).strip()\n    if not d:                   # blank string, if they ever ship one\n        return False\n    if ACK_DIGIT and d != ACK_DIGIT:\n        return False\n    return True\n\n\nhits = [r for r in rows if is_ack(r)]\nseen = [{\"custom_string\": r.get(\"custom_string\"),\n         \"to\": r.get(\"to\"),\n         \"status\": r.get(\"status_text\"),\n         \"digits\": r.get(\"digits\"),\n         \"machine_detected\": r.get(\"machine_detected\")}\n        for r in rows if (r.get(\"custom_string\") or \"\").startswith(REF)]\n\nif hits:\n    h = hits[0]\n    out = {\"acknowledged\": True, \"stage\": 2,\n           \"acked_by\": h.get(\"to\"), \"digit\": str(h.get(\"digits\")).strip(),\n           \"message_id\": h.get(\"message_id\"),\n           \"acked_at\": h.get(\"date_added\"), \"seen\": seen}\nelse:\n    out = {\"acknowledged\": False, \"stage\": 2,\n           \"acked_by\": None, \"digit\": None, \"seen\": seen}\n\nprint(json.dumps(out))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 600.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Stage 3: place the voice call to the secondary number.",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "861f5f25-403e-5a9b-9415-f1ee42732573",
+      "is_valid": true,
+      "sharing": true,
+      "label": "Call_3",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "POST",
+      "parameters": [
+        {
+          "description": "The URL to post to",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://rest.clicksend.com/v3/voice/send",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The body to use",
+          "id": "",
+          "name": "body",
+          "example": "{\n\t'json': 'blob'\n}",
+          "value": "{{ $parse_input.message.call_3_body }}",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthorization: Basic $clicksend_basic_auth",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to check the certificate or not",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "30",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 780.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "http",
+      "app_version": "1.4.0",
+      "description": "Stage 3: read call history after a delay. Queries the WHOLE incident window, so it also catches acks from earlier stages.",
+      "app_id": "f341b659-d00b-4a26-a8d4-d73727e0d271",
+      "errors": [],
+      "id": "db654b1a-2f8e-5f8d-ad38-4e20c57be3b5",
+      "is_valid": true,
+      "sharing": true,
+      "label": "Poll_3",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "GET",
+      "parameters": [
+        {
+          "description": "The URL to get",
+          "id": "",
+          "name": "url",
+          "example": "https://example.com",
+          "value": "https://rest.clicksend.com/v3/voice/history?date_from=$parse_input.message.date_from\u0026date_to=$parse_input.message.date_to\u0026limit=50",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Headers to use",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type: application/json",
+          "value": "Content-Type: application/json\nAuthorization: Basic $clicksend_basic_auth",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The username to use",
+          "id": "",
+          "name": "username",
+          "example": "Username",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The password to use",
+          "id": "",
+          "name": "password",
+          "example": "*****",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to check the certificate or not",
+          "id": "",
+          "name": "verify",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTP proxy",
+          "id": "",
+          "name": "http_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a HTTPS proxy",
+          "id": "",
+          "name": "https_proxy",
+          "example": "http://192.168.0.1:8080",
+          "value": "",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add a timeout for the request, in seconds",
+          "id": "",
+          "name": "timeout",
+          "example": "10",
+          "value": "30",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Write result to a file",
+          "id": "",
+          "name": "to_file",
+          "example": "false",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "bool"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 910.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 70,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Stage 3: decide whether anyone acknowledged. Stops the ladder if so.",
+      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
+      "errors": [
+        "Couldn't find app Shuffle Tools:1.2.0"
+      ],
+      "id": "4bd5cd58-4664-5d8d-81fe-fc42e436b011",
+      "is_valid": false,
+      "sharing": true,
+      "label": "Eval_3",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The Python code to run",
+          "id": "",
+          "name": "code",
+          "example": "print('hello')",
+          "value": "# ---------------------------------------------------------------\n# EVAL_3 - did anyone acknowledge yet?\n#\n# Reads the ClickSend call history returned by Poll_3 and decides.\n# Sets acknowledged=true to STOP the ladder.\n# ---------------------------------------------------------------\nimport json\n\nREF = \"$parse_input.message.incident_ref\"\nACK_DIGIT = \"$ack_digit\".strip()\n\nraw = r\"\"\"$poll_3\"\"\"\ntry:\n    resp = json.loads(raw) if isinstance(raw, str) else raw\nexcept Exception:\n    resp = {}\n\nrows = (((resp or {}).get(\"body\") or {}).get(\"data\") or {})\nrows = rows.get(\"data\") if isinstance(rows, dict) else rows\nif not isinstance(rows, list):\n    rows = []\n\n\ndef is_ack(rec):\n    \"\"\"THE ONLY PLACE AN ACK IS DECIDED. See the README node.\n\n    ClickSend sends digits as JSON null when no key was pressed, so the\n    None check MUST come before any string coercion. str(None) is\n    \"None\" - truthy and non-empty - which would pass Busy and\n    unanswered calls as acknowledgments and silently stop the ladder.\n    \"\"\"\n    cs = rec.get(\"custom_string\") or \"\"\n    if not cs.startswith(REF):\n        return False\n    d = rec.get(\"digits\")\n    if d is None:               # null == nobody pressed anything\n        return False\n    d = str(d).strip()\n    if not d:                   # blank string, if they ever ship one\n        return False\n    if ACK_DIGIT and d != ACK_DIGIT:\n        return False\n    return True\n\n\nhits = [r for r in rows if is_ack(r)]\nseen = [{\"custom_string\": r.get(\"custom_string\"),\n         \"to\": r.get(\"to\"),\n         \"status\": r.get(\"status_text\"),\n         \"digits\": r.get(\"digits\"),\n         \"machine_detected\": r.get(\"machine_detected\")}\n        for r in rows if (r.get(\"custom_string\") or \"\").startswith(REF)]\n\nif hits:\n    h = hits[0]\n    out = {\"acknowledged\": True, \"stage\": 3,\n           \"acked_by\": h.get(\"to\"), \"digit\": str(h.get(\"digits\")).strip(),\n           \"message_id\": h.get(\"message_id\"),\n           \"acked_at\": h.get(\"date_added\"), \"seen\": seen}\nelse:\n    out = {\"acknowledged\": False, \"stage\": 3,\n           \"acked_by\": None, \"digit\": None, \"seen\": seen}\n\nprint(json.dumps(out))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -639.999,
+        "y": 1040.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Builds the JSON result the calling workflow receives.",
+      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
+      "errors": [
+        "Couldn't find app Shuffle Tools:1.2.0"
+      ],
+      "id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "is_valid": false,
+      "sharing": true,
+      "label": "Verdict",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The Python code to run",
+          "id": "",
+          "name": "code",
+          "example": "print('hello')",
+          "value": "# ---------------------------------------------------------------\n# VERDICT - assemble what the caller gets back.\n#\n# Reachable from every Eval node AND from the fatal-input path, so it\n# must tolerate any of them being unexecuted (Shuffle leaves those\n# unsubstituted or empty).\n# ---------------------------------------------------------------\nimport json, time\n\n\ndef load(raw):\n    try:\n        v = json.loads(raw) if isinstance(raw, str) and raw.strip() else None\n        return v if isinstance(v, dict) else None\n    except Exception:\n        return None\n\n\nplan = load(r\"\"\"$parse_input.message\"\"\") or {}\nevals = [load(r\"\"\"$eval_1.message\"\"\"),\n         load(r\"\"\"$eval_2.message\"\"\"),\n         load(r\"\"\"$eval_3.message\"\"\")]\nevals = [e for e in evals if e]\n\nstarted = plan.get(\"started_at\") or int(time.time())\nacked = next((e for e in evals if e.get(\"acknowledged\")), None)\n\nout = {\n    \"incident_ref\": plan.get(\"incident_ref\"),\n    \"acknowledged\": bool(acked),\n    \"acked_by\": acked.get(\"acked_by\") if acked else None,\n    \"digit\": acked.get(\"digit\") if acked else None,\n    \"attempt\": acked.get(\"stage\") if acked else None,\n    \"acked_at\": acked.get(\"acked_at\") if acked else None,\n    \"elapsed_seconds\": int(time.time()) - int(started),\n    \"stages_run\": len(evals),\n    \"attempts\": (evals[-1].get(\"seen\") if evals else []),\n}\n\nif plan.get(\"fatal\"):\n    out[\"acknowledged\"] = False\n    out[\"error\"] = plan.get(\"error\")\n\nprint(json.dumps(out))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": -239.999,
+        "y": 1180.001
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    }
+  ],
+  "branches": [
+    {
+      "destination_id": "8fab8849-b867-5811-a608-781d5962b301",
+      "id": "ee375239-884c-5521-8a5b-745633c0af5c",
+      "source_id": "97b85c16-391a-5d66-8ce4-3323b0750a98",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "78545fa3-3e56-533a-ad26-5ba168860913",
+      "id": "4cf7bc4f-0c97-5a58-a720-f23726050ea3",
+      "source_id": "8fab8849-b867-5811-a608-781d5962b301",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "ecbd7f15-6bb9-4e27-89be-f997853c2e35",
+            "name": "source",
+            "example": "",
+            "value": "$parse_input.message.fatal",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "ecbd7f15-6bb9-4e27-89be-f997853c2e35",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "ecbd7f15-6bb9-4e27-89be-f997853c2e35",
+            "name": "destination",
+            "example": "",
+            "value": "false",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "id": "1ee9b836-1b22-5046-b1d5-13b5cf27fb2c",
+      "source_id": "8fab8849-b867-5811-a608-781d5962b301",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "013bf0ad-0f97-4553-9b08-49e2c39f33f4",
+            "name": "source",
+            "example": "",
+            "value": "$parse_input.message.fatal",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "013bf0ad-0f97-4553-9b08-49e2c39f33f4",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "013bf0ad-0f97-4553-9b08-49e2c39f33f4",
+            "name": "destination",
+            "example": "",
+            "value": "true",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "dd5e8076-0361-50d3-ac21-fe7ebe749538",
+      "id": "54f39035-a1d1-5936-b11f-d717d04156c6",
+      "source_id": "78545fa3-3e56-533a-ad26-5ba168860913",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "f25caf22-5b4d-51c7-b6de-28d296bb3b05",
+      "id": "a9776df7-bb58-5bb7-9ad3-8483383831fb",
+      "source_id": "dd5e8076-0361-50d3-ac21-fe7ebe749538",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "id": "d3169e31-4993-54ce-80dc-c82a8880dc76",
+      "source_id": "f25caf22-5b4d-51c7-b6de-28d296bb3b05",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "2f12cef4-9199-4484-96c6-76785c6cf4e8",
+            "name": "source",
+            "example": "",
+            "value": "$eval_1.message.acknowledged",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "2f12cef4-9199-4484-96c6-76785c6cf4e8",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "2f12cef4-9199-4484-96c6-76785c6cf4e8",
+            "name": "destination",
+            "example": "",
+            "value": "true",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "98110eb1-1413-580a-b9e5-186e6e3e718e",
+      "id": "b968f0e8-4e84-55e8-a0dc-7b94485b1397",
+      "source_id": "f25caf22-5b4d-51c7-b6de-28d296bb3b05",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "68b5be48-d287-40ee-8b2c-b65a06dde65f",
+            "name": "source",
+            "example": "",
+            "value": "$eval_1.message.acknowledged",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "68b5be48-d287-40ee-8b2c-b65a06dde65f",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "68b5be48-d287-40ee-8b2c-b65a06dde65f",
+            "name": "destination",
+            "example": "",
+            "value": "false",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "c6ca30f0-b8cd-58a6-b3db-6212b3f9bf11",
+      "id": "bcd101b5-2939-5138-9d7b-95d29455390d",
+      "source_id": "98110eb1-1413-580a-b9e5-186e6e3e718e",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "a89655bb-110f-58b4-8fae-29c6301d4126",
+      "id": "1fa25d6a-fb9c-5617-8957-fd5b5ed43907",
+      "source_id": "c6ca30f0-b8cd-58a6-b3db-6212b3f9bf11",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "id": "ee74e136-1a02-5043-a56d-5d77476c1486",
+      "source_id": "a89655bb-110f-58b4-8fae-29c6301d4126",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "5a56a9c6-0ba5-4bed-9be8-5d85528054be",
+            "name": "source",
+            "example": "",
+            "value": "$eval_2.message.acknowledged",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "5a56a9c6-0ba5-4bed-9be8-5d85528054be",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "5a56a9c6-0ba5-4bed-9be8-5d85528054be",
+            "name": "destination",
+            "example": "",
+            "value": "true",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "861f5f25-403e-5a9b-9415-f1ee42732573",
+      "id": "742a2218-f3f7-556d-bf14-41e13a8564bc",
+      "source_id": "a89655bb-110f-58b4-8fae-29c6301d4126",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "8d8b694b-d769-4125-a25f-3aa063da9c15",
+            "name": "source",
+            "example": "",
+            "value": "$eval_2.message.acknowledged",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "8d8b694b-d769-4125-a25f-3aa063da9c15",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "8d8b694b-d769-4125-a25f-3aa063da9c15",
+            "name": "destination",
+            "example": "",
+            "value": "false",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "db654b1a-2f8e-5f8d-ad38-4e20c57be3b5",
+      "id": "a3c5aaab-4a08-5949-a3a1-4611e4037f72",
+      "source_id": "861f5f25-403e-5a9b-9415-f1ee42732573",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "4bd5cd58-4664-5d8d-81fe-fc42e436b011",
+      "id": "0f515558-2e96-599e-a52a-800d5ae7c349",
+      "source_id": "db654b1a-2f8e-5f8d-ad38-4e20c57be3b5",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "id": "a42d2b06-f320-5495-a575-9fcc6bfcd2e1",
+      "source_id": "4bd5cd58-4664-5d8d-81fe-fc42e436b011",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "f791f2fd-fee4-44d0-bcb2-ca992ba68f3c",
+            "name": "source",
+            "example": "",
+            "value": "$eval_3.message.acknowledged",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "f791f2fd-fee4-44d0-bcb2-ca992ba68f3c",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "f791f2fd-fee4-44d0-bcb2-ca992ba68f3c",
+            "name": "destination",
+            "example": "",
+            "value": "true",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "id": "a42d2b06-f320-5495-a575-9fcc6bfcd2e1",
+      "source_id": "4bd5cd58-4664-5d8d-81fe-fc42e436b011",
+      "label": "",
+      "has_errors": false,
+      "conditions": [
+        {
+          "source": {
+            "description": "",
+            "id": "36ec151d-fa8f-4f1e-a191-398a225e7b62",
+            "name": "source",
+            "example": "",
+            "value": "$eval_3.message.acknowledged",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "condition": {
+            "description": "",
+            "id": "36ec151d-fa8f-4f1e-a191-398a225e7b62",
+            "name": "condition",
+            "example": "",
+            "value": "equals",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          },
+          "destination": {
+            "description": "",
+            "id": "36ec151d-fa8f-4f1e-a191-398a225e7b62",
+            "name": "destination",
+            "example": "",
+            "value": "false",
+            "multiline": false,
+            "multiselect": false,
+            "options": null,
+            "action_field": "",
+            "variant": "STATIC_VALUE",
+            "required": false,
+            "configuration": false,
+            "tags": null,
+            "schema": {
+              "type": ""
+            },
+            "skip_multicheck": false,
+            "value_replace": null,
+            "unique_toggled": false,
+            "error": "",
+            "hidden": false
+          }
+        }
+      ],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    }
+  ],
+  "visual_branches": [],
+  "triggers": [],
+  "comments": [],
+  "configuration": {
+    "exit_on_error": false,
+    "start_from_top": false,
+    "skip_notifications": false
+  },
+  "created": 0,
+  "edited": 0,
+  "last_runtime": 0,
+  "due_date": 0,
+  "id": "35889412-4bda-4f86-aaa6-543a203fc8d5",
+  "is_valid": true,
+  "name": "SRIS_voice_ack",
+  "description": "REUSABLE SUBFLOW - phone escalation with keypress acknowledgment.\n\nCall from any workflow with a Subflow node ('Wait for results' ON) and a JSON argument: {\"incident_ref\":\"...\",\"message\":\"...\",\"numbers\":[\"+351...\"]}\n\nReturns {acknowledged, acked_by, digit, attempt, elapsed_seconds, attempts}. Branch on .message.acknowledged equals true.\n\nThree-stage ladder, stops on first keypress. Read the README node on the canvas before changing anything - especially the is_ack() null handling, which is what stops failed calls being counted as acknowledgments.\n\nSETUP: set the clicksend_basic_auth workflow variable to base64('user:apikey').",
+  "start": "97b85c16-391a-5d66-8ce4-3323b0750a98",
+  "owner": "",
+  "sharing": "private",
+  "execution_org": {
+    "name": "NOSHUT",
+    "id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
+    "users": null,
+    "role": "",
+    "child_orgs": null,
+    "region_url": "",
+    "is_partner": false,
+    "image": "",
+    "creator_org": "",
+    "branding": {
+      "enable_chat": false,
+      "home_url": "",
+      "theme": "",
+      "documentation_link": "",
+      "global_user": false,
+      "support_email": "",
+      "logout_url": "",
+      "brand_color": "",
+      "brand_name": ""
+    }
+  },
+  "org_id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
+  "workflow_variables": [
+    {
+      "description": "base64 of 'clicksend_username:apikey'. Generate with: echo -n 'user@example.com:APIKEY' | base64   -- never paste the raw API key into a node.",
+      "id": "32a4e7a0-4647-41c7-b435-0a367808232a",
+      "name": "clicksend_basic_auth",
+      "value": "REPLACE_ME"
+    },
+    {
+      "description": "Fallback on-call list as a JSON array of E.164 numbers, in escalation order. Used only when the caller does not pass 'numbers'.",
+      "id": "fdcde735-641e-49e4-87f0-9c67aa4fcb52",
+      "name": "oncall_numbers",
+      "value": "[\"+351914410068\"]"
+    },
+    {
+      "description": "Which keypress counts as an acknowledgment. Leave blank to accept any key.",
+      "id": "5d5bc237-fbb3-4db5-80b0-4954df09ca70",
+      "name": "ack_digit",
+      "value": "1"
+    }
+  ],
+  "execution_environment": "",
+  "previously_saved": true,
+  "categories": {
+    "siem": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "communication": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "assets": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "cases": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "network": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "intel": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "edr": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "iam": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "ai": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "email": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "other": {
+      "name": "",
+      "count": 12,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    }
+  },
+  "example_argument": "{\"incident_ref\":\"SBG-20260803-0412\",\"message\":\"Impossible travel detectado para Super Bock Group\",\"numbers\":[\"+351914410068\"]}",
+  "public": false,
+  "default_return_value": "",
+  "contact_info": {
+    "name": "",
+    "url": ""
+  },
+  "published_id": "",
+  "revision_id": "",
+  "usecase_ids": [],
+  "input_questions": [],
+  "form_control": {
+    "input_markdown": "",
+    "output_yields": null,
+    "cleanup_actions": null,
+    "form_width": 0
+  },
+  "blogpost": "",
+  "video": "",
+  "status": "test",
+  "workflow_type": "standalone",
+  "generated": false,
+  "hidden": false,
+  "background_processing": false,
+  "updated_by": "gilc@noshut.pt",
+  "validated": false,
+  "validation": {
+    "valid": false,
+    "changed_at": 0,
+    "last_valid": 0,
+    "validation_ran": false,
+    "notifications_created": 0,
+    "environment": "",
+    "workflow_id": "",
+    "execution_id": "",
+    "node_id": "",
+    "total_problems": 0,
+    "errors": null,
+    "subflow_apps": null
+  },
+  "parentorg_workflow": "",
+  "childorg_workflow_ids": [],
+  "suborg_distribution": [],
+  "backup_config": {
+    "onprem_backup": false,
+    "upload_repo": "",
+    "upload_branch": "",
+    "upload_username": "",
+    "upload_token": "",
+    "tokens_encrypted": false
+  },
+  "auth_groups": []
+}
