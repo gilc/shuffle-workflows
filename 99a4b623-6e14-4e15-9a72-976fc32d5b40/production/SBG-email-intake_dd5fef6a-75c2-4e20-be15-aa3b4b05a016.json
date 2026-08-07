@@ -1973,7 +1973,7 @@
           "id": "",
           "name": "argument",
           "example": "",
-          "value": "{\"incident_ref\":\"SBG-{{ 'now' | date: '%s' }}\",\"message\":\"Impossible Travel detected for Super Bock Group\",\"numbers\":[\"+351914410068\",\"+351914410068\"]}",
+          "value": "{\"incident_ref\":\"SBG-{{ 'now' | date: '%s' }}\",\"message\":\"Impossible Travel detected for Super Bock Group\",\"numbers\":[\"+351252217843\",\"+351914410068\"]}",
           "multiline": false,
           "multiselect": false,
           "options": null,
