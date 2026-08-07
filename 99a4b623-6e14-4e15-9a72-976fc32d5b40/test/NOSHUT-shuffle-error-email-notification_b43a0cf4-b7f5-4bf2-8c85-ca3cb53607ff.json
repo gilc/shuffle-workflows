@@ -328,9 +328,6 @@
   "edited": 1786099866,
   "last_runtime": 0,
   "due_date": 1774742400,
-  "errors": [
-    "Variable notify_from is empty!"
-  ],
   "id": "b43a0cf4-b7f5-4bf2-8c85-ca3cb53607ff",
   "is_valid": true,
   "name": "NOSHUT shuffle error email notification",
@@ -378,7 +375,7 @@
       "description": "Optional From address. ONLY works if the identity Shuffle authenticates as has Send As on that mailbox (app token with Mail.Send, or delegated with Mail.Send.Shared + Send As). Leave empty otherwise - Graph rejects the send.",
       "id": "bab894eb-6468-40a7-84db-7f94d55c449a",
       "name": "notify_from",
-      "value": ""
+      "value": "sris+shuffle@noshut.pt"
     }
   ],
   "execution_environment": "",
