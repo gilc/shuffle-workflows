@@ -4912,7 +4912,7 @@
             },
             {
               "key": "${message}",
-              "value": "Clicksend finished {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\nFailed: {{ $filter_iris_success.invalid | size }}"
+              "value": "SRIS voice ack - $verdict.message.incident_ref\\nAcknowledged: $verdict.message.acknowledged\\nBy: $verdict.message.acked_by (pressed $verdict.message.digit)\\nOn call $verdict.message.attempt of $verdict.message.stages_run\\nElapsed: $verdict.message.elapsed_seconds s\\nNumbers from: $verdict.message.input_source"
             }
           ],
           "unique_toggled": false,
@@ -6789,7 +6789,7 @@
     "skip_notifications": false
   },
   "created": 1785840468,
-  "edited": 1786092925,
+  "edited": 1786092982,
   "last_runtime": 0,
   "due_date": 0,
   "id": "bae600a1-9e86-4536-b5ea-f363cd631aaa",
