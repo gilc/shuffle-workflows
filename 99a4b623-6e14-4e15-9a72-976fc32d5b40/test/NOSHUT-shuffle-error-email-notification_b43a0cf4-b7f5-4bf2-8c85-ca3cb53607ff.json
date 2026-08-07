@@ -1,0 +1,515 @@
+{
+  "workflow_as_code": false,
+  "actions": [
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Escapes the Shuffle notification text and assembles the Graph sendMail payload.",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
+      "id": "20b777a0-1125-599b-a05d-c0b3e2b132ce",
+      "is_valid": true,
+      "isStartNode": true,
+      "sharing": true,
+      "label": "build_body",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The Python code to run",
+          "id": "",
+          "name": "code",
+          "example": "print('hello')",
+          "value": "# ---------------------------------------------------------------\n# BUILD_BODY - assemble the Graph sendMail payload safely.\n#\n# NOTE ON THIS COMMENT BLOCK: variable names are written WITHOUT their\n# leading dollar sign. Shuffle substitutes variables everywhere in this\n# parameter, comments included - a real dollar reference here would be\n# replaced by the error text itself, and a multi-line traceback landing\n# mid-comment breaks the node. That would take out alerting for exactly\n# the failure you needed to hear about.\n#\n# WHY THIS NODE EXISTS AT ALL\n# The previous approach dropped exec.title and exec.description straight\n# into the JSON body of the send node. That works until an error message\n# contains a double quote, a backslash or a newline - a Python traceback,\n# an echoed HTTP response - at which point the JSON is malformed, the\n# send fails, and the alert never arrives. The weirder the failure, the\n# more likely it goes unreported. json.dumps() escapes all of it.\n#\n# THE NEWLINE BEFORE EACH CLOSING TRIPLE-QUOTE IS LOAD-BEARING\n# Shuffle substitutes as raw text. A value ending in a double quote would\n# sit against the closing delimiter and make four quotes in a row, which\n# is a syntax error that kills the node. The newline keeps them apart.\n# Do not \"tidy\" it away.\n# ---------------------------------------------------------------\nimport json\n\ntitle = r\"\"\"$exec.title\n\"\"\"\ndesc = r\"\"\"$exec.description\n\"\"\"\nprefix = r\"\"\"$notify_subject_prefix\n\"\"\"\nsender = r\"\"\"$notify_from\n\"\"\"\n\n# --- recipients -------------------------------------------------\ntry:\n    recipients = json.loads(r\"\"\"$notify_recipients\"\"\")\nexcept Exception:\n    recipients = []\nif isinstance(recipients, str):\n    recipients = [recipients]\nrecipients = [a.strip() for a in recipients\n              if isinstance(a, str) and \"@\" in a and a.strip()]\n\n# Sending to nobody is worse than sending to the wrong person: it fails\n# silently and the workflow still looks healthy.\nfallback_used = False\nif not recipients:\n    recipients = [\"gilc@noshut.pt\"]\n    fallback_used = True\n\n# --- subject ----------------------------------------------------\nprefix = \" \".join(prefix.split()) or \"[Shuffle]\"\nsubject = \" \".join((prefix + \" \" + title).split())[:230]\nif fallback_used:\n    subject = subject + \" (recipient list empty - check notify_recipients)\"\n\n# --- body -------------------------------------------------------\ncontent = desc.strip()\nif not content:\n    content = \"(Shuffle sent no description with this notification.)\"\nif len(content) \u003e 30000:\n    content = content[:30000] + \"\\n\\n[truncated by build_body]\"\n\nmessage = {\n    \"subject\": subject,\n    \"body\": {\"contentType\": \"Text\", \"content\": content},\n    \"toRecipients\": [{\"emailAddress\": {\"address\": a}} for a in recipients],\n}\n\n# Optional From. ONLY works if the identity Shuffle authenticates as holds\n# Send As on that mailbox (app token with Mail.Send, or delegated token\n# with Mail.Send.Shared plus Send As). Graph rejects the send otherwise,\n# so leave notify_from empty unless that is set up.\nsender = sender.strip()\nif sender and \"@\" in sender:\n    message[\"from\"] = {\"emailAddress\": {\"address\": sender}}\n\n# saveToSentItems intentionally NOT set - Graph defaults to true and the\n# copy in Sent Items is wanted here.\nprint(json.dumps({\"message\": message}))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 118.59761904761913,
+        "y": -0.322809523809525
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "NOSHUT_Outlook_Office365",
+      "app_version": "1.1.0",
+      "description": "Sends an email \n\nhttps://graph.microsoft.com/v1.0/me/sendMail",
+      "app_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
+      "errors": [],
+      "id": "08574e58-9797-4ac8-8e21-570dd129f1cc",
+      "is_valid": true,
+      "isStartNode": true,
+      "private_id": "b4392e6f61f8d0d75c4ffceea4c5cd0e",
+      "label": "NOSHUT_Outlook_Office365_1",
+      "public": false,
+      "generated": true,
+      "environment": "Shuffle",
+      "name": "post_send_mail",
+      "parameters": [
+        {
+          "description": "The URL of the API",
+          "id": "",
+          "name": "url",
+          "example": "https://graph.microsoft.com",
+          "value": "Secret. Replaced during app execution!",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": true,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Generated by shuffler.io OpenAPI",
+          "id": "",
+          "name": "body",
+          "example": "{\n  \"message\": {\n    \"subject\": \"${subject}\",\n    \"body\": {\n      \"contentType\": \"Text\",\n      \"content\": \"${content}\"\n     },\n  \"toRecipients\": [\n      {\n        \"emailAddress\": {\n          \"address\": \"${target}\"\n        }\n      }\n    ]  \n  }\n}",
+          "value": "{{ $build_body.message }}",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add or edit headers",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type=application/json\nAccept=application/json\r\n",
+          "value": "Content-type=application/json\nAccept=application/json",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add or edit queries",
+          "id": "",
+          "name": "queries",
+          "example": "view=basic\u0026redirect=test",
+          "value": "",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Check if you want to verify request",
+          "id": "",
+          "name": "ssl_verify",
+          "example": "True",
+          "value": "False",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "False",
+            "True"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Choose if we should write the result straight to a file or not",
+          "id": "",
+          "name": "to_file",
+          "example": "False",
+          "value": "False",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "False",
+            "True"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 118.59761904761913,
+        "y": 219.67719047619048
+      },
+      "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
+      "category": "Communication",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": [
+        "Send Message"
+      ],
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    }
+  ],
+  "branches": [
+    {
+      "destination_id": "08574e58-9797-4ac8-8e21-570dd129f1cc",
+      "id": "951ee28b-2f4a-56ae-b680-0c68baecf4f8",
+      "source_id": "20b777a0-1125-599b-a05d-c0b3e2b132ce",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    }
+  ],
+  "visual_branches": [],
+  "triggers": [],
+  "comments": [
+    {
+      "id": "10279657-e5b6-5270-b8f7-4b82fda3a040",
+      "label": "WHY NOT SUBSTITUTE STRAIGHT INTO THE SEND NODE: a quote, backslash or newline in a Shuffle error message breaks the JSON body and the send fails silently - so you stop hearing about exactly the failures that are least routine. json.dumps here escapes all of it. The newline before each closing triple-quote is deliberate too; the code explains why.",
+      "type": "COMMENT",
+      "is_valid": true,
+      "decorator": true,
+      "width": 340,
+      "height": 230,
+      "color": "#ffffff",
+      "backgroundcolor": "#1f2023",
+      "position": {
+        "x": 478.5976190476191,
+        "y": -0.322809523809525
+      }
+    },
+    {
+      "id": "c625900c-efcc-595b-a943-587080e13f8c",
+      "label": "UNCHANGED FROM THE ORIGINAL except the body parameter. Same auth object, url, headers, ssl_verify and position. saveToSentItems is not set, so Graph keeps its default and the copy still lands in Sent Items.",
+      "type": "COMMENT",
+      "is_valid": true,
+      "decorator": true,
+      "width": 340,
+      "height": 190,
+      "color": "#ffffff",
+      "backgroundcolor": "#1f2023",
+      "position": {
+        "x": 478.5976190476191,
+        "y": 219.67719047619048
+      }
+    },
+    {
+      "id": "a2470f11-b271-5786-97dd-f54d150586dd",
+      "label": "KEEP THIS WORKFLOW SMALL. It is what tells you every other workflow broke, and nothing watches it in turn - each node added here is another way for it to fail silently. Flood control (suppressing repeats of the same title) was left out for that reason: it needs a cache action and a second failure point.",
+      "type": "COMMENT",
+      "is_valid": true,
+      "decorator": true,
+      "width": 340,
+      "height": 215,
+      "color": "#ffffff",
+      "backgroundcolor": "#1f2023",
+      "position": {
+        "x": 478.5976190476191,
+        "y": 439.6771904761905
+      }
+    }
+  ],
+  "configuration": {
+    "exit_on_error": false,
+    "start_from_top": false,
+    "skip_notifications": false
+  },
+  "created": 1774871438,
+  "edited": 1774872246,
+  "last_runtime": 0,
+  "due_date": 1774742400,
+  "id": "b43a0cf4-b7f5-4bf2-8c85-ca3cb53607ff",
+  "is_valid": true,
+  "name": "NOSHUT shuffle error email notification",
+  "description": "Org notification workflow. Shuffle invokes it with exec.title and exec.description when another workflow errors.\n\nbuild_body escapes that text with json.dumps and assembles the Graph sendMail payload; the send node posts it unchanged. Substituting the variables straight into the JSON body was the previous approach, and it breaks whenever an error message contains a quote, a backslash or a newline - which is precisely when the alert matters.\n\nSETUP: notify_recipients (JSON array of addresses). Optionally notify_subject_prefix and notify_from. Leave notify_from empty unless the Shuffle identity has Send As on that mailbox.",
+  "start": "20b777a0-1125-599b-a05d-c0b3e2b132ce",
+  "owner": "",
+  "sharing": "private",
+  "execution_org": {
+    "name": "NOSHUT",
+    "id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
+    "users": null,
+    "role": "",
+    "child_orgs": null,
+    "region_url": "",
+    "is_partner": false,
+    "image": "",
+    "creator_org": "",
+    "branding": {
+      "enable_chat": false,
+      "home_url": "",
+      "theme": "",
+      "documentation_link": "",
+      "global_user": false,
+      "support_email": "",
+      "logout_url": "",
+      "brand_color": "",
+      "brand_name": ""
+    }
+  },
+  "org_id": "99a4b623-6e14-4e15-9a72-976fc32d5b40",
+  "workflow_variables": [
+    {
+      "description": "JSON array of recipient addresses. Change who gets alerted here rather than editing the node body.",
+      "id": "2bef6de9-f66b-4dc6-b669-084051940987",
+      "name": "notify_recipients",
+      "value": "[\"gilc@noshut.pt\", \"jpires@noshut.pt\"]"
+    },
+    {
+      "description": "Prefix on every subject so Outlook rules can filter and route these. Defaults to [Shuffle] if left blank.",
+      "id": "af3a5ca4-1345-4abc-b630-66633778b9dc",
+      "name": "notify_subject_prefix",
+      "value": "[Shuffle]"
+    },
+    {
+      "description": "Optional From address. ONLY works if the identity Shuffle authenticates as has Send As on that mailbox (app token with Mail.Send, or delegated with Mail.Send.Shared + Send As). Leave empty otherwise - Graph rejects the send.",
+      "id": "bab894eb-6468-40a7-84db-7f94d55c449a",
+      "name": "notify_from",
+      "value": ""
+    }
+  ],
+  "execution_environment": "",
+  "previously_saved": true,
+  "categories": {
+    "siem": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "communication": {
+      "name": "",
+      "count": 1,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "assets": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "cases": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "network": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "intel": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "edr": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "iam": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "ai": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "email": {
+      "name": "",
+      "count": 0,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    },
+    "other": {
+      "name": "",
+      "count": 1,
+      "id": "",
+      "description": "",
+      "large_image": ""
+    }
+  },
+  "example_argument": "",
+  "public": false,
+  "default_return_value": "",
+  "contact_info": {
+    "name": "",
+    "url": ""
+  },
+  "published_id": "",
+  "revision_id": "",
+  "usecase_ids": [],
+  "input_questions": null,
+  "form_control": {
+    "input_markdown": "",
+    "output_yields": null,
+    "cleanup_actions": null,
+    "form_width": 0
+  },
+  "blogpost": "",
+  "video": "",
+  "status": "test",
+  "workflow_type": "",
+  "generated": false,
+  "hidden": false,
+  "background_processing": false,
+  "updated_by": "gilc@noshut.pt",
+  "validated": false,
+  "validation": {
+    "valid": false,
+    "changed_at": 0,
+    "last_valid": 0,
+    "validation_ran": false,
+    "notifications_created": 0,
+    "environment": "",
+    "workflow_id": "",
+    "execution_id": "",
+    "node_id": "",
+    "total_problems": 0,
+    "errors": null,
+    "subflow_apps": null
+  },
+  "parentorg_workflow": "",
+  "childorg_workflow_ids": null,
+  "suborg_distribution": [],
+  "backup_config": {
+    "onprem_backup": false,
+    "upload_repo": "",
+    "upload_branch": "",
+    "upload_username": "",
+    "upload_token": "",
+    "tokens_encrypted": false
+  },
+  "auth_groups": null
+}
