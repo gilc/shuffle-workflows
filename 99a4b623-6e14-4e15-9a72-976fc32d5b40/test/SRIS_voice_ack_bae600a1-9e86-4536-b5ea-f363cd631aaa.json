@@ -4909,6 +4909,10 @@
             {
               "key": "${chat_id}",
               "value": "-5423102040"
+            },
+            {
+              "key": "${message}",
+              "value": "Clicksend finished {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\nFailed: {{ $filter_iris_success.invalid | size }}"
             }
           ],
           "unique_toggled": false,
@@ -6649,7 +6653,7 @@
       "source_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -6785,7 +6789,7 @@
     "skip_notifications": false
   },
   "created": 1785840468,
-  "edited": 1785841279,
+  "edited": 1786092925,
   "last_runtime": 0,
   "due_date": 0,
   "id": "bae600a1-9e86-4536-b5ea-f363cd631aaa",
