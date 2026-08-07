@@ -375,7 +375,7 @@
       "description": "Optional From address. ONLY works if the identity Shuffle authenticates as has Send As on that mailbox (app token with Mail.Send, or delegated with Mail.Send.Shared + Send As). Leave empty otherwise - Graph rejects the send.",
       "id": "bab894eb-6468-40a7-84db-7f94d55c449a",
       "name": "notify_from",
-      "value": "alerts@noshut.pt"
+      "value": "shuffle@noshut.pt"
     }
   ],
   "execution_environment": "",
