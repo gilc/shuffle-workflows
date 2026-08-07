@@ -5,12 +5,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Full operating documentation. Safe to run; does nothing.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "97b85c16-391a-5d66-8ce4-3323b0750a98",
-      "is_valid": false,
+      "is_valid": true,
       "isStartNode": true,
       "sharing": true,
       "label": "README_read_me_first",
@@ -37,6 +35,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -70,12 +69,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Validates caller input and pre-builds all call payloads.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "8fab8849-b867-5811-a608-781d5962b301",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Parse_Input",
       "public": true,
@@ -101,6 +98,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -163,6 +161,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -186,6 +185,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -209,6 +209,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -232,6 +233,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -255,6 +257,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -281,6 +284,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -304,6 +308,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -327,6 +332,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -350,6 +356,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -412,6 +419,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -435,6 +443,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -458,6 +467,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -481,6 +491,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -507,6 +518,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -530,6 +542,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -553,6 +566,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -576,6 +590,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -602,6 +617,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -635,12 +651,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 1/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "f25caf22-5b4d-51c7-b6de-28d296bb3b05",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_1",
       "public": true,
@@ -666,6 +680,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -728,6 +743,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -751,6 +767,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -774,6 +791,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -797,6 +815,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -820,6 +839,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -846,6 +866,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -869,6 +890,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -892,6 +914,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -915,6 +938,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -977,6 +1001,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1000,6 +1025,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1023,6 +1049,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1046,6 +1073,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1072,6 +1100,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1095,6 +1124,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1118,6 +1148,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1141,6 +1172,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1167,6 +1199,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1200,12 +1233,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 2/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "a89655bb-110f-58b4-8fae-29c6301d4126",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_2",
       "public": true,
@@ -1231,6 +1262,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1293,6 +1325,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1316,6 +1349,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1339,6 +1373,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1362,6 +1397,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1385,6 +1421,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1411,6 +1448,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1434,6 +1472,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1457,6 +1496,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1480,6 +1520,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1542,6 +1583,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1565,6 +1607,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1588,6 +1631,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1611,6 +1655,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1637,6 +1682,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1660,6 +1706,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1683,6 +1730,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1706,6 +1754,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1732,6 +1781,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1765,12 +1815,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 3/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "4bd5cd58-4664-5d8d-81fe-fc42e436b011",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_3",
       "public": true,
@@ -1796,6 +1844,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1858,6 +1907,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1881,6 +1931,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1904,6 +1955,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1927,6 +1979,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1950,6 +2003,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1976,6 +2030,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1999,6 +2054,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2022,6 +2078,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2045,6 +2102,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2107,6 +2165,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2130,6 +2189,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2153,6 +2213,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2176,6 +2237,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2202,6 +2264,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2225,6 +2288,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2248,6 +2312,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2271,6 +2336,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2297,6 +2363,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2330,12 +2397,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 4/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "fcdb5219-ddea-5918-8b62-70822983cb50",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_4",
       "public": true,
@@ -2361,6 +2426,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2423,6 +2489,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2446,6 +2513,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2469,6 +2537,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2492,6 +2561,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2515,6 +2585,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2541,6 +2612,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2564,6 +2636,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2587,6 +2660,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2610,6 +2684,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2672,6 +2747,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2695,6 +2771,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2718,6 +2795,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2741,6 +2819,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2767,6 +2846,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2790,6 +2870,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2813,6 +2894,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2836,6 +2918,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2862,6 +2945,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2895,12 +2979,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 5/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "cf7c6688-03c0-5708-ad10-7528ba023096",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_5",
       "public": true,
@@ -2926,6 +3008,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2988,6 +3071,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3011,6 +3095,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3034,6 +3119,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3057,6 +3143,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3080,6 +3167,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3106,6 +3194,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3129,6 +3218,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3152,6 +3242,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3175,6 +3266,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3237,6 +3329,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3260,6 +3353,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3283,6 +3377,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3306,6 +3401,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3332,6 +3428,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3355,6 +3452,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3378,6 +3476,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3401,6 +3500,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3427,6 +3527,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3460,12 +3561,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 6/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "04c9fa24-2284-5061-a1ad-7276398b5cd9",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_6",
       "public": true,
@@ -3491,6 +3590,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3553,6 +3653,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3576,6 +3677,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3599,6 +3701,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3622,6 +3725,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3645,6 +3749,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3671,6 +3776,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3694,6 +3800,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3717,6 +3824,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3740,6 +3848,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3802,6 +3911,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3825,6 +3935,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3848,6 +3959,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3871,6 +3983,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3897,6 +4010,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3920,6 +4034,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3943,6 +4058,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3966,6 +4082,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -3992,6 +4109,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4025,12 +4143,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 7/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "67631406-1573-5f9e-bccc-6a883ba4b111",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_7",
       "public": true,
@@ -4056,6 +4172,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4118,6 +4235,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4141,6 +4259,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4164,6 +4283,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4187,6 +4307,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4210,6 +4331,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4236,6 +4358,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4259,6 +4382,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4282,6 +4406,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4305,6 +4430,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4367,6 +4493,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4390,6 +4517,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4413,6 +4541,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4436,6 +4565,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4462,6 +4592,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4485,6 +4616,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4508,6 +4640,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4531,6 +4664,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4557,6 +4691,7 @@
             "type": "bool"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4590,12 +4725,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Stage 8/8: decide whether anyone acknowledged.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "7aaa70ab-48be-56ed-b36c-1d9abfe05f34",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Eval_8",
       "public": true,
@@ -4621,6 +4754,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4654,12 +4788,10 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Builds the JSON result the calling workflow receives.",
-      "app_id": "17ceb4e5-60f9-4f7d-b2d1-722a794005a9",
-      "errors": [
-        "Couldn't find app Shuffle Tools:1.2.0"
-      ],
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
       "id": "6c0421a1-02ba-5720-8be4-c273a506c868",
-      "is_valid": false,
+      "is_valid": true,
       "sharing": true,
       "label": "Verdict",
       "public": true,
@@ -4685,6 +4817,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -4709,6 +4842,226 @@
       "run_magic_input": false,
       "execution_delay": 0,
       "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Telegram_Bot",
+      "app_version": "1.1.0",
+      "description": "\n\nhttps://api.telegram.org/bot{api_token}/sendMessage",
+      "app_id": "0a67232d3daeb76b278279f6b2269a97",
+      "errors": [],
+      "id": "0908cbdc-f20e-478c-bc2b-77a9a7b975f6",
+      "is_valid": true,
+      "private_id": "0a67232d3daeb76b278279f6b2269a97",
+      "label": "Telegram_Bot_1",
+      "public": false,
+      "generated": true,
+      "environment": "Shuffle",
+      "name": "post_send_message",
+      "parameters": [
+        {
+          "description": "The URL of the API",
+          "id": "",
+          "name": "url",
+          "example": "https://api.telegram.org",
+          "value": "Secret. Replaced during app execution!",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": true,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Generated by shuffler.io OpenAPI",
+          "id": "",
+          "name": "body",
+          "example": "{\"chat_id\": ${chat_id}, \"text\": \"${message}\"}",
+          "value": "{\"chat_id\": ${chat_id}, \"text\": \"${message}\"}",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": [
+            {
+              "key": "${chat_id}",
+              "value": "-5423102040"
+            }
+          ],
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Generated by shuffler.io OpenAPI",
+          "id": "",
+          "name": "api_token",
+          "example": "",
+          "value": "7742742918:AAG36KcpYxRZmENa8jCrSPhfEStpsmAhjgY",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add or edit headers",
+          "id": "",
+          "name": "headers",
+          "example": "Content-Type=application/json\nAccept=application/json\r\n",
+          "value": "Content-Type=application/json",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Add or edit queries",
+          "id": "",
+          "name": "queries",
+          "example": "view=basic\u0026redirect=test",
+          "value": "",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Check if you want to verify request",
+          "id": "",
+          "name": "ssl_verify",
+          "example": "True",
+          "value": "False",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "False",
+            "True"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Choose if we should write the result straight to a file or not",
+          "id": "",
+          "name": "to_file",
+          "example": "False",
+          "value": "False",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "False",
+            "True"
+          ],
+          "action_field": "",
+          "variant": "STATIC_VALUE",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 849.3835812182498,
+        "y": 2033.0756597081017
+      },
+      "authentication_id": "f56893f1-5e81-4bf6-ab2b-33b8bda30fd5",
+      "category": "Communication",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": [
+        "Send Message"
+      ],
       "suggestion": false,
       "parent_controlled": false,
       "source_workflow": "",
@@ -4753,6 +5106,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4776,6 +5130,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4799,6 +5154,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4836,6 +5192,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4859,6 +5216,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4882,6 +5240,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4941,6 +5300,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4964,6 +5324,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -4987,6 +5348,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5024,6 +5386,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5047,6 +5410,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5070,6 +5434,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5129,6 +5494,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5152,6 +5518,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5175,6 +5542,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5212,6 +5580,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5235,6 +5604,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5258,6 +5628,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5317,6 +5688,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5340,6 +5712,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5363,6 +5736,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5400,6 +5774,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5423,6 +5798,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5446,6 +5822,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5505,6 +5882,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5528,6 +5906,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5551,6 +5930,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5588,6 +5968,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5611,6 +5992,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5634,6 +6016,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5693,6 +6076,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5716,6 +6100,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5739,6 +6124,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5776,6 +6162,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5799,6 +6186,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5822,6 +6210,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5881,6 +6270,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5904,6 +6294,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5927,6 +6318,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5964,6 +6356,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -5987,6 +6380,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6010,6 +6404,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6069,6 +6464,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6092,6 +6488,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6115,6 +6512,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6152,6 +6550,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6175,6 +6574,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6198,6 +6598,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -6238,6 +6639,17 @@
       "label": "",
       "has_errors": false,
       "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "0908cbdc-f20e-478c-bc2b-77a9a7b975f6",
+      "id": "d13a3abe-ea7e-42df-a3f0-04df68f3834c",
+      "source_id": "6c0421a1-02ba-5720-8be4-c273a506c868",
+      "label": "",
+      "has_errors": false,
+      "conditions": null,
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -6373,12 +6785,9 @@
     "skip_notifications": false
   },
   "created": 1785840468,
-  "edited": 1785840649,
+  "edited": 1785841279,
   "last_runtime": 0,
   "due_date": 0,
-  "errors": [
-    "App Shuffle Tools version 1.2.0 doesn't exist"
-  ],
   "id": "bae600a1-9e86-4536-b5ea-f363cd631aaa",
   "is_valid": true,
   "name": "SRIS_voice_ack",
@@ -6441,7 +6850,7 @@
     },
     "communication": {
       "name": "",
-      "count": 0,
+      "count": 1,
       "id": "",
       "description": "",
       "large_image": ""
