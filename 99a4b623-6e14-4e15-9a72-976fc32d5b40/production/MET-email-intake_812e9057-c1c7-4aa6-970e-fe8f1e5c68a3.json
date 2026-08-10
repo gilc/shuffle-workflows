@@ -721,7 +721,7 @@
             },
             {
               "key": "${message}",
-              "value": "Processed {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\nFailed: {{ $filter_iris_success.invalid | size }}"
+              "value": "Created {{ $filter_iris_success.valid | size }} IRIS alerts from {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\nSkipped (low severity): {{ $filter_low.valid | size }}\n\nFailed: {{ $filter_iris_success.invalid | size }}"
             }
           ],
           "unique_toggled": false,
@@ -1960,7 +1960,7 @@
           "id": "",
           "name": "body",
           "example": "{\n  \"body\": {\n     \"content\": \"Hello world\"\n  }\n}",
-          "value": "{\n  \"body\": {\n     \"content\": \"Processed {{ $filter_iris_success.valid | size }} of {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\n\"\n  }\n}",
+          "value": "{\n  \"body\": {\n     \"content\": \"Created {{ $filter_iris_success.valid | size }} IRIS alerts from {{ $get_customer_folder_emails.body.value | size }} emails in $workflow_customer's intake folder.\nSkipped (low severity): {{ $filter_low.valid | size }}\n\"\n  }\n}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -2959,7 +2959,7 @@
     "skip_notifications": false
   },
   "created": 1778154442,
-  "edited": 1786362389,
+  "edited": 1786362841,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "812e9057-c1c7-4aa6-970e-fe8f1e5c68a3",
@@ -3157,13 +3157,13 @@
   "validated": false,
   "validation": {
     "valid": true,
-    "changed_at": 1786362618000,
-    "last_valid": 1786362618000,
+    "changed_at": 1786363558000,
+    "last_valid": 1786363558000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "89d10929-05a4-4341-80c4-f0eab2f81b00",
+    "execution_id": "45add981-168e-4a63-a388-9e19bec8fd5a",
     "node_id": "",
     "total_problems": 0,
     "errors": [],
