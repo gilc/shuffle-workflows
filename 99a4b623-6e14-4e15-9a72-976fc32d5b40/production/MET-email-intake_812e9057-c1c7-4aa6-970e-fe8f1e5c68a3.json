@@ -5,7 +5,7 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "",
-      "app_id": "3e18a46d-6d21-41e4-a0c6-15c0fc487e44",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
       "errors": [],
       "id": "3355f6cd-0ff0-498e-9c04-6a79fbfe8b74",
       "is_valid": true,
@@ -35,6 +35,7 @@
             "type": ""
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -97,6 +98,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -120,6 +122,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -143,6 +146,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -166,6 +170,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -192,6 +197,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -218,6 +224,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -280,6 +287,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -303,6 +311,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -326,6 +335,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -352,6 +362,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -378,6 +389,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -440,6 +452,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -463,6 +476,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -486,6 +500,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -496,7 +511,7 @@
           "id": "",
           "name": "message_id",
           "example": "",
-          "value": "$filter_iris_success.valid.#.message.email_message_id",
+          "value": "$combine_handled.message.#.email_message_id",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -509,6 +524,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -532,6 +548,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -555,6 +572,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -581,6 +599,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -607,6 +626,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -669,6 +689,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -692,6 +713,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": [
             {
               "key": "${chat_id}",
@@ -724,6 +746,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -747,6 +770,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -770,6 +794,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -796,6 +821,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -822,6 +848,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -886,6 +913,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -909,6 +937,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -919,7 +948,7 @@
           "id": "",
           "name": "id",
           "example": "",
-          "value": "$filter_iris_success.valid.#.message.email_message_id",
+          "value": "$combine_handled.message.#.email_message_id",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -932,6 +961,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -955,6 +985,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -978,6 +1009,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1004,6 +1036,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1030,6 +1063,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1092,6 +1126,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1115,6 +1150,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1125,7 +1161,7 @@
           "id": "",
           "name": "id",
           "example": "",
-          "value": "$filter_iris_success.valid.#.message.email_message_id",
+          "value": "$combine_handled.message.#.email_message_id",
           "multiline": false,
           "multiselect": false,
           "options": null,
@@ -1138,6 +1174,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1161,6 +1198,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1184,6 +1222,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1210,6 +1249,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1236,6 +1276,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1269,7 +1310,7 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Runs python with the data input. Any prints will be returned.",
-      "app_id": "3e18a46d-6d21-41e4-a0c6-15c0fc487e44",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
       "errors": [],
       "id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
       "is_valid": true,
@@ -1298,6 +1339,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1360,6 +1402,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1383,6 +1426,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1393,7 +1437,7 @@
           "id": "TOGGLED",
           "name": "body",
           "example": "{\n  \"alert_title\": \"${alert_title}\",\n  \"alert_description\": \"${alert_description}\",\n  \"alert_source\": \"${alert_source}\",\n  \"alert_source_ref\": \"${alert_source_ref}\",\n  \"alert_source_link\": \"${alert_source_link}\",\n  \"alert_severity_id\": \"${alert_severity_id}\",\n  \"alert_status_id\": \"${alert_status_id}\",\n  \"alert_source_event_time\": \"${alert_source_event_time}\",\n  \"alert_note\": \"${alert_note}\",\n  \"alert_tags\": \"${alert_tags}\",\n  \"alert_customer_id\": \"${alert_customer}\",\n  \"alert_classification_id\": \"${alert_classification_id}\",\n  \"alert_source_content\": \"${alert_source_content}\"\n}",
-          "value": "{\"alert_title\":\"$parse_socaas_email.#.message.alert_title\",\"alert_description\":\"$parse_socaas_email.#.message.alert_description\",\"alert_source\":\"$parse_socaas_email.#.message.alert_source\",\"alert_source_ref\":\"$parse_socaas_email.#.message.alert_source_ref\",\"alert_source_link\":\"$parse_socaas_email.#.message.socaas_link\",\"alert_severity_id\":\"$parse_socaas_email.#.message.alert_severity_id\",\"alert_status_id\":\"$parse_socaas_email.#.message.alert_status_id\",\"alert_source_event_time\":\"$parse_socaas_email.#.message.alert_source_event_time\",\"alert_note\":\"Imported automatically from FortiGuard SOCaaS email intake.\",\"alert_tags\":\"$parse_socaas_email.#.message.alert_tags\",\"alert_customer_id\":\"$parse_socaas_email.#.message.alert_customer_id\",\"alert_source_content\":\"$parse_socaas_email.#.message.alert_source_content\"}",
+          "value": "{\"alert_title\":\"$filter_not_low.valid.#.message.alert_title\",\"alert_description\":\"$filter_not_low.valid.#.message.alert_description\",\"alert_source\":\"$filter_not_low.valid.#.message.alert_source\",\"alert_source_ref\":\"$filter_not_low.valid.#.message.alert_source_ref\",\"alert_source_link\":\"$filter_not_low.valid.#.message.socaas_link\",\"alert_severity_id\":\"$filter_not_low.valid.#.message.alert_severity_id\",\"alert_status_id\":\"$filter_not_low.valid.#.message.alert_status_id\",\"alert_source_event_time\":\"$filter_not_low.valid.#.message.alert_source_event_time\",\"alert_note\":\"Imported automatically from FortiGuard SOCaaS email intake.\",\"alert_tags\":\"$filter_not_low.valid.#.message.alert_tags\",\"alert_customer_id\":\"$filter_not_low.valid.#.message.alert_customer_id\",\"alert_source_content\":\"$filter_not_low.valid.#.message.alert_source_content\"}",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -1406,6 +1450,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1429,6 +1474,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1452,6 +1498,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1478,6 +1525,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1504,6 +1552,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1537,7 +1586,7 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Merges two lists of same type AND length.",
-      "app_id": "3e18a46d-6d21-41e4-a0c6-15c0fc487e44",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
       "errors": [],
       "id": "f83ccfbb-6d5f-4e58-b5ed-17499bbf449a",
       "is_valid": true,
@@ -1566,6 +1615,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1576,7 +1626,7 @@
           "id": "",
           "name": "list_two",
           "example": "{'key2': 'value2'}",
-          "value": "$parse_socaas_email",
+          "value": "$filter_not_low.valid",
           "multiline": true,
           "multiselect": false,
           "options": null,
@@ -1589,6 +1639,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1612,6 +1663,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1635,6 +1687,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1658,6 +1711,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1691,7 +1745,7 @@
       "app_name": "Shuffle Tools",
       "app_version": "1.2.0",
       "description": "Takes a list and filters based on your data",
-      "app_id": "3e18a46d-6d21-41e4-a0c6-15c0fc487e44",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
       "errors": [],
       "id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
       "is_valid": true,
@@ -1720,6 +1774,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1743,6 +1798,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1779,6 +1835,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1802,6 +1859,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1828,6 +1886,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1890,6 +1949,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1913,6 +1973,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1936,6 +1997,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1959,6 +2021,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -1982,6 +2045,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2008,6 +2072,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2034,6 +2099,7 @@
             "type": "string"
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2052,6 +2118,419 @@
       },
       "authentication_id": "9948d0f4c7d385bfb6eed08f78deda8b",
       "category": "Communication",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Takes a list and filters based on your data",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
+      "id": "4350f11f-d33e-4ec2-85ed-f7ff3e6444b9",
+      "is_valid": true,
+      "sharing": true,
+      "label": "filter_not_low",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "filter_list",
+      "parameters": [
+        {
+          "description": "The list to filter from. Don't use .# into this.",
+          "id": "",
+          "name": "input_list",
+          "example": "[{\"data\": \"1.2.3.4\"}, {\"data\": \"1.2.3.5\"}]",
+          "value": "$parse_socaas_email",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The field to check in the input list",
+          "id": "",
+          "name": "field",
+          "example": "data",
+          "value": "message.severity_text",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Type of check",
+          "id": "",
+          "name": "check",
+          "example": "equals",
+          "value": "equals",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "equals",
+            "equals any of",
+            "larger than",
+            "less than",
+            "is empty",
+            "contains",
+            "contains any of",
+            "in cache key",
+            "starts with",
+            "ends with",
+            "field is unique",
+            "files by extension"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The value to compare with",
+          "id": "",
+          "name": "value",
+          "example": "1.2.3.4",
+          "value": "low",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to add or to NOT add",
+          "id": "",
+          "name": "opposite",
+          "example": "false",
+          "value": "true",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 564.2817334319375,
+        "y": -1241.9565400684633
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Takes a list and filters based on your data",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
+      "id": "b275f038-10c4-4ebc-8fbe-d7d6bbd6b56b",
+      "is_valid": true,
+      "sharing": true,
+      "label": "filter_low",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "filter_list",
+      "parameters": [
+        {
+          "description": "The list to filter from. Don't use .# into this.",
+          "id": "",
+          "name": "input_list",
+          "example": "[{\"data\": \"1.2.3.4\"}, {\"data\": \"1.2.3.5\"}]",
+          "value": "$parse_socaas_email",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The field to check in the input list",
+          "id": "",
+          "name": "field",
+          "example": "data",
+          "value": "message.severity_text",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Type of check",
+          "id": "",
+          "name": "check",
+          "example": "equals",
+          "value": "equals",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "equals",
+            "equals any of",
+            "larger than",
+            "less than",
+            "is empty",
+            "contains",
+            "contains any of",
+            "in cache key",
+            "starts with",
+            "ends with",
+            "field is unique",
+            "files by extension"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "The value to compare with",
+          "id": "",
+          "name": "value",
+          "example": "1.2.3.4",
+          "value": "low",
+          "multiline": false,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        },
+        {
+          "description": "Whether to add or to NOT add",
+          "id": "",
+          "name": "opposite",
+          "example": "false",
+          "value": "false",
+          "multiline": false,
+          "multiselect": false,
+          "options": [
+            "false",
+            "true"
+          ],
+          "action_field": "",
+          "variant": "",
+          "required": false,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 564.2817334319375,
+        "y": -921.9565400684633
+      },
+      "authentication_id": "",
+      "category": "Other",
+      "reference_url": "",
+      "sub_action": false,
+      "run_magic_output": false,
+      "run_magic_input": false,
+      "execution_delay": 0,
+      "category_label": null,
+      "suggestion": false,
+      "parent_controlled": false,
+      "source_workflow": "",
+      "source_execution": ""
+    },
+    {
+      "app_name": "Shuffle Tools",
+      "app_version": "1.2.0",
+      "description": "Runs python with the data input. Any prints will be returned.",
+      "app_id": "7cb87f17-3c49-4ff1-8dc0-2f1cb6c4ebab",
+      "errors": [],
+      "id": "afccdff9-e3f2-49ca-a9e2-dbe71df3f70b",
+      "is_valid": true,
+      "sharing": true,
+      "label": "combine_handled",
+      "public": true,
+      "generated": false,
+      "environment": "Shuffle",
+      "name": "execute_python",
+      "parameters": [
+        {
+          "description": "The code to run. Can be a file ID from within Shuffle.",
+          "id": "",
+          "name": "code",
+          "example": "print(\"hello world\")",
+          "value": "import json\n\n# Emails whose IRIS alert was created successfully (non-low severity)\nraw_iris_ok = \"\"\"$filter_iris_success.valid\"\"\"\n# Low-severity emails: intentionally no IRIS alert, but still need housekeeping\nraw_low = \"\"\"$filter_low.valid\"\"\"\n\ndef ids(raw):\n    try:\n        data = json.loads(raw)\n    except Exception:\n        return []\n    if isinstance(data, dict):\n        data = [data]\n    out = []\n    for item in data if isinstance(data, list) else []:\n        if not isinstance(item, dict):\n            continue\n        msg = item.get(\"message\", item)\n        if isinstance(msg, str):\n            try:\n                msg = json.loads(msg)\n            except Exception:\n                msg = {}\n        if not isinstance(msg, dict):\n            continue\n        mid = msg.get(\"email_message_id\")\n        if mid:\n            out.append(mid)\n    return out\n\ncombined = ids(raw_iris_ok) + ids(raw_low)\nseen, uniq = set(), []\nfor m in combined:\n    if m not in seen:\n        seen.add(m)\n        uniq.append(m)\n\nprint(json.dumps([{\"email_message_id\": m} for m in uniq]))\n",
+          "multiline": true,
+          "multiselect": false,
+          "options": null,
+          "action_field": "",
+          "variant": "",
+          "required": true,
+          "configuration": false,
+          "tags": null,
+          "schema": {
+            "type": "string"
+          },
+          "skip_multicheck": false,
+          "custom_value": false,
+          "value_replace": null,
+          "unique_toggled": false,
+          "error": "",
+          "hidden": false
+        }
+      ],
+      "execution_variable": {
+        "description": "",
+        "id": "",
+        "name": "",
+        "value": ""
+      },
+      "position": {
+        "x": 1494.2817334319375,
+        "y": -1051.9565400684633
+      },
+      "authentication_id": "",
+      "category": "Other",
       "reference_url": "",
       "sub_action": false,
       "run_magic_output": false,
@@ -2146,6 +2625,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -2169,6 +2649,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -2192,6 +2673,7 @@
               "type": ""
             },
             "skip_multicheck": false,
+            "custom_value": false,
             "value_replace": null,
             "unique_toggled": false,
             "error": "",
@@ -2199,17 +2681,6 @@
           }
         }
       ],
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
-    },
-    {
-      "destination_id": "53b5e2ef-4bce-4f14-aa4b-9d34c569e296",
-      "id": "51689bbf-6085-45be-a870-b012ef5ae585",
-      "source_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
-      "label": "",
-      "has_errors": false,
-      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2237,17 +2708,6 @@
       "source_parent": ""
     },
     {
-      "destination_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
-      "id": "74207f23-a672-4848-8a8e-f2bb797d01d1",
-      "source_id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
-      "label": "",
-      "has_errors": false,
-      "conditions": [],
-      "decorator": false,
-      "parent_controlled": false,
-      "source_parent": ""
-    },
-    {
       "destination_id": "9278ffa0-48d3-4c89-91b7-919a82692d97",
       "id": "8b80e28c-0267-47ce-b8d5-9c357c29d735",
       "source_id": "3e495e2e-5540-4a65-aaf7-667424faf284",
@@ -2265,6 +2725,72 @@
       "label": "",
       "has_errors": false,
       "conditions": null,
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "4350f11f-d33e-4ec2-85ed-f7ff3e6444b9",
+      "id": "04a74753-f5ef-4c31-8e3e-d1afee72c1d0",
+      "source_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "b275f038-10c4-4ebc-8fbe-d7d6bbd6b56b",
+      "id": "82a72966-c2fc-44d4-a018-7d99adbb784a",
+      "source_id": "8e1237d4-ce01-4ca8-a433-bed1ad877b27",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "53b5e2ef-4bce-4f14-aa4b-9d34c569e296",
+      "id": "89a31245-8726-4f45-a4f1-5bf77910272a",
+      "source_id": "4350f11f-d33e-4ec2-85ed-f7ff3e6444b9",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "afccdff9-e3f2-49ca-a9e2-dbe71df3f70b",
+      "id": "b3fc7f92-09f0-4c5e-b036-b0ee0914dd8b",
+      "source_id": "b0cc6b42-4e4d-4303-97f9-9940f722bdb0",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "afccdff9-e3f2-49ca-a9e2-dbe71df3f70b",
+      "id": "8992e073-0ca8-407a-8717-c80ea437b002",
+      "source_id": "b275f038-10c4-4ebc-8fbe-d7d6bbd6b56b",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
+      "decorator": false,
+      "parent_controlled": false,
+      "source_parent": ""
+    },
+    {
+      "destination_id": "d9411bbd-c666-463f-8c1d-1de6a22c57b6",
+      "id": "3902f72a-a14e-4300-ba6a-60955c60ccdb",
+      "source_id": "afccdff9-e3f2-49ca-a9e2-dbe71df3f70b",
+      "label": "",
+      "has_errors": false,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2308,6 +2834,7 @@
             "type": ""
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2331,6 +2858,7 @@
             "type": ""
           },
           "skip_multicheck": false,
+          "custom_value": false,
           "value_replace": null,
           "unique_toggled": false,
           "error": "",
@@ -2431,7 +2959,7 @@
     "skip_notifications": false
   },
   "created": 1778154442,
-  "edited": 1779368213,
+  "edited": 1781711910,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "812e9057-c1c7-4aa6-970e-fe8f1e5c68a3",
@@ -2595,7 +3123,7 @@
     },
     "other": {
       "name": "",
-      "count": 3,
+      "count": 6,
       "id": "",
       "description": "",
       "large_image": ""
@@ -2629,13 +3157,13 @@
   "validated": false,
   "validation": {
     "valid": true,
-    "changed_at": 1781711708000,
-    "last_valid": 1781711708000,
+    "changed_at": 1786361717000,
+    "last_valid": 1786361717000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "304f61ec-9c7a-441b-9198-fba8c270a316",
+    "execution_id": "37aa24ee-cb1b-45e0-9fb0-95470d7414a3",
     "node_id": "",
     "total_problems": 0,
     "errors": [],
