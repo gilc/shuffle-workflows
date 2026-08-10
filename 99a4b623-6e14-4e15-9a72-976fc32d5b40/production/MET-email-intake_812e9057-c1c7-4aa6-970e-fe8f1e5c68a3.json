@@ -640,8 +640,8 @@
         "value": ""
       },
       "position": {
-        "x": 577.7600598832165,
-        "y": -456.96103890466645
+        "x": 529.3006637231172,
+        "y": -304.0110697743529
       },
       "authentication_id": "0654a0ddf655b801fceb9f43ac785f40",
       "category": "Communication",
@@ -1566,8 +1566,8 @@
         "value": ""
       },
       "position": {
-        "x": 557.659424909858,
-        "y": -929.043379666861
+        "x": 819.0217797541841,
+        "y": -1011.3241210067414
       },
       "authentication_id": "40bd1c34-72c4-47ce-92f0-f4c46c209d0c",
       "category": "Cases",
@@ -1725,8 +1725,8 @@
         "value": ""
       },
       "position": {
-        "x": 400.49094139393634,
-        "y": -734.5785699980896
+        "x": 952.255912731958,
+        "y": -821.6993549461984
       },
       "authentication_id": "",
       "category": "Other",
@@ -1900,8 +1900,8 @@
         "value": ""
       },
       "position": {
-        "x": 560.9773399144767,
-        "y": -667.9738897074234
+        "x": 1101.4488761666325,
+        "y": -619.5734536251407
       },
       "authentication_id": "",
       "category": "Other",
@@ -2463,8 +2463,8 @@
         "value": ""
       },
       "position": {
-        "x": 564.2817334319375,
-        "y": -921.9565400684633
+        "x": 491.6810793085136,
+        "y": -828.3823636427169
       },
       "authentication_id": "",
       "category": "Other",
@@ -2526,8 +2526,8 @@
         "value": ""
       },
       "position": {
-        "x": 1494.2817334319375,
-        "y": -1051.9565400684633
+        "x": 876.3694994481295,
+        "y": -513.0983516857168
       },
       "authentication_id": "",
       "category": "Other",
@@ -2724,7 +2724,7 @@
       "source_id": "9278ffa0-48d3-4c89-91b7-919a82692d97",
       "label": "",
       "has_errors": false,
-      "conditions": null,
+      "conditions": [],
       "decorator": false,
       "parent_controlled": false,
       "source_parent": ""
@@ -2959,7 +2959,7 @@
     "skip_notifications": false
   },
   "created": 1778154442,
-  "edited": 1781711910,
+  "edited": 1786361881,
   "last_runtime": 0,
   "due_date": 1778022000,
   "id": "812e9057-c1c7-4aa6-970e-fe8f1e5c68a3",
@@ -3157,13 +3157,13 @@
   "validated": false,
   "validation": {
     "valid": true,
-    "changed_at": 1786361717000,
-    "last_valid": 1786361717000,
+    "changed_at": 1786362008000,
+    "last_valid": 1786362008000,
     "validation_ran": true,
     "notifications_created": 0,
     "environment": "Shuffle",
     "workflow_id": "",
-    "execution_id": "37aa24ee-cb1b-45e0-9fb0-95470d7414a3",
+    "execution_id": "f400ea9c-4933-451a-9d34-298c06a466d7",
     "node_id": "",
     "total_problems": 0,
     "errors": [],
